@@ -1,0 +1,101 @@
+Food Item,Carbon kg CO2eq/kg
+beer in can,0.69
+beer in glass,0.96
+beer modular can,0.53
+chocolate or cream filled cookies,1.53
+simple cookies,1.39
+mineral water,0.49
+bread multicereal,0.7
+bread plain,0.89
+bread whole,0.77
+bread frozen,1.31
+cornflakes,2.64
+dark chocolate,2.71
+milk chocolate,3.6
+coffee ground,5.13
+coffee parchment,8.29
+coffee drip filtered,0.6
+coffee soluble powder,0.33
+espresso,0.55
+flavored crackers,0.93
+plain crackers,1.35
+wholegrain crackers,0.97
+crispbread,1.35
+ketchup,1.46
+mayonnaise,2.04
+tempe’,1.1
+egg pasta,3.15
+raspberries (f),1.18
+apple juice (i),2.84
+blueberry juice (i),3
+cranberry juice (i),2.88
+fig juice (i),3.2
+kiwi juice (i),2.84
+mango juice (i),2.96
+pineapple juice (i),2.78
+strawberry juice (i),2.68
+orange juice,0.46
+pear juice,0.49
+buckwheat flour,1.96
+durum wheat,0.47
+graham flour,0.47
+maize flour,1.31
+millet flour,1.37
+oat meal,0.87
+sorghum flour,1.33
+wheat plain flour,0.52
+whole wheat flour,0.36
+chocolate,6.6
+ice cream,1.02
+vanilla,4.3
+azuki bean flour,1.32
+mung bean flour,1.49
+soy meal,0.62
+beans in can,0.11
+green beans in can,1.45
+beans (f),1.77
+green beans (f),2.74
+margarine*,1.39
+almond covered with chocolate,4.8
+hazelnut covered with chocolate,3.43
+almond paste,2.98
+hazelnut cream,2.71
+hazelnut paste,1.69
+peanut butter,1.15
+peanut paste,1.84
+olive oil,3.27
+palm oil,2.43
+peanut oil,2.9
+rapeseed oil,1.79
+soybean oil,1.79
+sunflower oil,0.98
+pasta,1.21
+pesto,2.71
+pesto without garlic,2.72
+beet sugar,0.94
+cane sugar,0.62
+cakes and croissant,2.14
+cocoa cakes and croissant,1.94
+tomato chopped,1.47
+tomato peeled,1.3
+tomato puree,1.03
+tomato & basil,1.14
+tomato arrabbiata,1.24
+carrots canned,1.6
+corn canned,1.36
+carrots (f),0.27
+zucchini (f),1.35
+soy cream,1.62
+almond milk,0.42
+coconut milk,0.41
+rice milk,0.66
+soy milk,0.78
+quorne,2.5
+soy burger,1.48
+tofu,2.27
+soy yogurt,1.36
+wine red (see: box wine),0.87
+wine white (see: box wine),0.44
+yeast compressed,0.82
+yeast dried,3.29
+yeast liquid,0.5
