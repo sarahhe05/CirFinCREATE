@@ -8,9 +8,8 @@ almond milk,0.4179027998
 almond paste,2.98
 anchovy,0.82065
 anglerfish,12.2922
-apple,0.09958913429999999
+apple,0.1178083039090909
 apple juice,2.84
-apples,0.3
 apricot,0.296
 artichoke,0.33
 asiago,10.24
@@ -20,18 +19,14 @@ atlantic mackerel,0.52697348
 avocado,0.81525
 azuki bean flour,1.32
 bacon,4.025
-banana,0.4586947766666667
-bananas,0.7999999999999999
+banana,0.5440210824999999
 barley,0.79
 barnacle,2.295
-bean,0.433
-beans,1.77
-beef,22.78956661
-beef cattle,13.547517
+bean,1.1015
+beef,22.17342996933333
 beer,0.7280333333333333
 beet sugar,1.17
-beetroot,0.119858507
-berries & grapes,1.1
+beetroot,0.11985850699999999
 black pepper,2.3819699
 blackberry,0.421
 blueberry,0.775
@@ -53,23 +48,22 @@ canned beans,0.109
 canned carrots,1.6
 canned corn,1.355
 canned green beans,1.45
+canned tuna,2.1
 carp,1.762
-carrob,1.1035
-carrot,0.07885719236363636
+carrot,0.164244093
 carrots,0.267
 cashew nut,1.382
 cassava,0.9
 catfish,8.93
-cauliflower,0.22480901272727277
+cauliflower,0.22480901272727272
 celery,0.32
 cheddar,11.207
-cheese,15.0666666665
-cheese semi-hard,8.647
+cheese,12.926777777666667
 cherry,0.445851125
 chestnut,0.44
 chicken,6.299993993285715
 chickpea,0.77
-chicory roots,0.069150204
+chicory root,0.069150204
 chicory witloof,0.34702798777777777
 chilly,0.8
 chocolate,6.6
@@ -79,7 +73,7 @@ cocoa cakes and croissant,1.9365
 coconut,1.78
 coconut milk,0.4126201796
 cod,3.0525
-cod fish stick,2.14
+cod stick,2.14
 coffee,3.6922000000000006
 coffee bean,1.6521771
 coffee parchment,8.29
@@ -88,30 +82,27 @@ cookie,1.461875
 cornflakes,2.64
 cow milk,1.1545122666666667
 cowpea,0.485
+crackers,1.34825
 cranberry,0.87
 cranberry juice,2.88
 cream,5.45
 crispbread,1.348
 cucumber,1.0453645833333332
-cull ewe,12.16356515
-cull goat,7.5672528
 currant,0.6385
 cuttlefish,5.05
 dark chocolate,10.705
 date,0.6
 diamond fish,6.017
-duck,3.499351475
-durum wheat,0.46712
-durum wheat grain,0.72289848
+duck,3.4993514749999997
+durum wheat,0.59500924
 eel,3.88
-egg,2.751299
-egg pasta,3.1511
+egg,2.7512990000000004
 eggplant,1.5454999999999999
-eggs,2.945599
 emmental,8.2
 emu,1.5
 european anchovy,0.44165738
 european pilchard,0.23838899000000002
+ewe,12.16356515
 exotic fruit,2.43
 extruded flaxseed,1.1159789
 fennel,0.48
@@ -122,7 +113,7 @@ fish mixed,4.988
 fish stick,2.260802469
 flatfish,6.406
 flathead,2.56
-flavored crackers,0.9265
+flavored cracker,0.9265
 flaxseed,0.28375354
 fork beard,8.0086
 french bean,0.092845649
@@ -136,24 +127,20 @@ gooseberry,0.84
 graham flour,0.47
 grain maize,0.35756017333333334
 grana padano,15.34
-grape,0.4590229266666667
+grape,0.5574137560000001
 grapefruit,0.29007067
-grapes,0.31
 great scallop,0.67363034
-green bean,0.39525
-green beans,2.741769912
+green bean,1.1774233040000002
 ground coffee,5.129285715
-groundnuts,2.4
+groundnut,2.4
 guava,0.279
 haddock,3.41
-hake,10.4006
-hake fish stick,2.14
+hake,6.270300000000001
 hazelnut,1.112
 hazelnut covered with chocolate,3.43
 hazelnut cream,2.71
 hazelnut paste,1.685
-hemp,0.499062565
-hemp fibre,0.36855223
+hemp,0.45555912
 herring,1.2685
 honey,1.7425
 ice cream,1.02
@@ -164,12 +151,11 @@ kid goat,2.5513698
 kiwi,0.40534114
 kiwi juice,2.84
 krill,5.54
-lamb,17.310243162
-large trout,2.5291281
+lamb,15.686411435000002
 leek,0.33133642199999996
 lemon,0.22
 lentil,1.03
-lettuce,0.61764405
+lettuce,0.6176440500000001
 lime,0.22
 ling,6.4486
 lobster,17.172778
@@ -185,9 +171,9 @@ mango juice,2.96
 margarine,1.39
 mascarpone,5.7
 mayonnaise,2.04
-mealworms,2.84
+mealworm,2.84
 megrim,14.1544
-melon,0.4437773014285714
+melon,0.44377730142857147
 milk,2.8000000000000003
 milk chocolate,3.6
 millet,0.855
@@ -198,17 +184,16 @@ mixed nuts,0.47
 mozzarella,8.2
 mung bean flour,1.49
 mushroom,2.062835052
-mussels,0.45164669
+mussel,0.45164669
 neck,4.025
 nuts,0.2
 oat,0.67
 oat grain,0.5486705
 oatmeal,1.235
 octopus,6.839305555499999
+olive,0.636
 olive oil,4.6325
-olives,0.636
-onion,0.1132345808
-onions & leeks,0.3
+onion,0.14436215066666666
 orange,0.3
 orange juice,0.461
 other fruit,0.7
@@ -218,18 +203,18 @@ palm fruit bunch,0.9070672766666666
 palm nut,0.8
 palm oil,5.016
 parmigiano reggiano,12.54
-pasta,1.2055
+pasta,2.1783
 pea,0.446
 peach,0.25814851
 peanut,0.8305
 peanut butter,1.15
 peanut oil,2.8975
 peanut paste,1.84
-pear,0.12463648325
+pear,0.12463648325000001
 pear juice,0.49045
 peas,0.7999999999999999
 pecorino,17.15
-pepper,1.8511666666666668
+pepper,1.8511666666666666
 pesto,2.713
 pesto without garlic,2.717
 pilchard,1.0968
@@ -237,7 +222,6 @@ pineapple,0.5642288418333333
 pineapple juice,2.78
 pistachio,1.6
 plaice,6.13
-plain crackers,1.34825
 plum,0.258
 pollock,1.1475
 pollock stick,2.14
@@ -245,23 +229,20 @@ pomegranate,0.7426923075
 pomelo,0.51
 pomfret,6.6286
 porbeagle,11.436
-pork,6.377631877000001
+pork,6.377631877000002
 pork ham,7.945
-pork sausages,17.94
+pork sausage,17.94
 potato,0.14428171142857144
 poultry meat,6.1000000000000005
 pumpkin,0.2362540984
-quinoa,0.974
-quinoa fr,6.4643859
+quinoa,3.71919295
 quorne,2.5
 rabbit,5.3622093
 radish,0.15379
 raisin,0.81
-rape seed,0.782
-rapeseed,1.0060383375000002
+rapeseed,0.96123067
 rapeseed oil,2.74302
-raspberries,1.175
-raspberry,3.9909999999999997
+raspberry,3.0523333333333333
 red wine,0.873
 rhombus,8.41
 rice,3.0943902439024393
@@ -300,7 +281,7 @@ spinach,0.338
 spring faba bean,0.29421099
 spring pea,0.33601555
 squid,6.91
-starchy roots,0.29
+starchy root,0.29
 stracchino,4.92
 strawberry,0.9210449390833332
 strawberry juice,2.68
@@ -320,11 +301,10 @@ tomato & basil,1.1415
 tomato arrabbiata,1.244
 tomatoes,1.4
 triticale grain,0.53554457
-trout,4.2875
+trout,3.7013760333333336
 tuna,3.1578125000000004
-tuna in can,2.1
 turbot,14.5136
-turkey,4.010013808999999
+turkey,4.010013809
 turnip,0.35
 vanilla,4.3
 veal,9.913173
@@ -333,10 +313,9 @@ vining pea,0.39562345
 walnut,1.5453512799999998
 watermelon,0.52
 wheat,0.5715
-wheat plain flour,0.52
+wheat flour,0.44235820895
 white wine,0.4444
 whiting,2.6632
-whole wheat flour,0.3647164179
 wholegrain crackers,0.9725
 wine,1.4
 winter pea,0.38356449
@@ -344,4 +323,4 @@ wool,4.2131137
 yeast,1.5403333333333336
 yellowfin tuna,1.8867815
 yogurt,2.6710666666666665
-zucchini,0.5933596475
+zucchini,0.5933596475000001
