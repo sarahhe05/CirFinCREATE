@@ -1,0 +1,122 @@
+/*reset page spacing*/
+* {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  @font-face {
+    font-family: 'Josefin Sans'; /* Name your font */
+    src: url('/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
+  }
+
+  
+  body {
+   background-color: #c5dca0;
+  }
+  
+  h1 {
+    color: #1d0100;
+    font-size: 35pt;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Josefin Sans';
+  }
+  
+  h2 {
+    text-align: left;
+    color: #1d0100;
+    font-size: 20pt;
+    padding-top: 10px;
+    font-family: 'Josefin Sans';
+  }
+  
+  h3{
+    text-align: left;
+    color: #1d0100;
+    font-size: 12pt;
+    font-family: 'Josefin Sans';
+  }
+
+  p {
+    font-size: 12pt;
+    font-family: 'Josefin Sans';
+    color: #1d0100;
+  }
+
+  /*home*/
+  #home-section{
+    background-image: url('./ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp');
+    background-position: 50% 20%;
+    background-size: cover;
+    }
+
+  #ecomenu{
+    padding-top: 350px;
+    font-size: 75pt;
+    text-align: left;
+    margin-left: 10%;
+    color: #efffda;
+  }
+
+  #intro{
+    text-align: left;
+    margin-left: 10%;
+    padding-top: 5px;
+    color: #efffda;
+  }
+
+  .landing-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 10%;
+    margin-right: 60%;
+    padding-top: 25px;
+    padding-bottom: 500px;
+  }
+  
+  .landing-button {
+    font-size: 25px;
+    background-color: #efffda;
+    padding: 10px 24px;
+    border-radius: 8px;
+  }
+
+  .landing-button:hover {
+    background-color: #838b55; /* Green */
+    color: #efffda;
+  }
+
+
+/*learn*/
+  #learn-section{
+  padding-top: 150px;
+  padding-bottom: 50px;
+  background-color: #1d0100;
+  }
+
+  .light-text{
+    color:#efffda;
+  }
+
+/*recipes*/
+  #recipes-section{
+    padding-top: 150px;
+    padding-bottom: 50px;    
+    background-color: #c5dca0;
+    }
+
+  @media (max-width: 600px) {
+    .projects-row {
+      display: flex;
+      flex-wrap: wrap; /* Change to flex-wrap if screen width is less than 600px */
+    }
+  }
+
+/*visualizations*/
+  #visualizations-section{
+    padding-top: 150px;
+    padding-bottom: 50px;    
+    background-color: #3d4026;
+    }
