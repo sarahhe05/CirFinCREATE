@@ -46,10 +46,12 @@
 
   /*home*/
   #home-section{
-    background-image: url('./ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp');
+    background: linear-gradient(to bottom, transparent 60%, #1d0100), 
+    url('/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
     background-position: 50% 20%;
     background-size: cover;
     }
+
 
   #ecomenu{
     padding-top: 350px;
@@ -62,7 +64,7 @@
   #intro{
     text-align: left;
     margin-left: 10%;
-    padding-top: 5px;
+    margin-top: 5px;
     color: #efffda;
   }
 
@@ -81,6 +83,7 @@
     background-color: #efffda;
     padding: 10px 24px;
     border-radius: 8px;
+    border: none;
   }
 
   .landing-button:hover {
