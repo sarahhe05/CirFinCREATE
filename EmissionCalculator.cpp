@@ -1,15 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 int endColumnIndex(string line, int targetColumn);
 int jumpColumnIndex(string line, int targetColumn);
+void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ingredientListWithUnitAndAmnt, string rawIngredientList, vector<string>& ingredientList);
+double returnAmount(string ingredientWithUnitAndAmnt);
+string returnUnit(string ingredientWithUnitAndAmnt, string ingredient);
 
 int main(){
     
-    ifstream inFS;                  // enable read file
+    ifstream inFS;                  // enable read file for recipes.csv / test.csv
     inFS.open("test.csv");
 
     if(!inFS.is_open()){            // check for potential open error
@@ -17,22 +21,58 @@ int main(){
         return 1;
     }
 
-    int column = 1;
-    string line, ingredientList, ingredient, unit;
-    int amount;
+    ifstream enFS;                  // enable read file for ingredients.csv
+    enFS.open("ingredients.csv");
+
+    if(!enFS.is_open()){
+        cout << "ingredients.csv cannot be opened" << endl;
+        return 1;
+    }
+
+    string line, rawIngredientListWithUnitAndAmnt, rawIngredientList, unit;
+    int recipeNum;
+    double amount;
+    vector<string> ingredientListWithUnitAndAmnt, ingredientList;
+    vector<double> emissionOfEachRecipes;
+    vector<int> oddRecipes;
     
     getline(inFS, line);     // we don't need the headers
     inFS.clear();
 
+    recipeNum = 1;
     while(getline(inFS, line)){
         // A function that returns the index of the start of a new column for ingredient column        
         int nextIndex = jumpColumnIndex(line, 2);
         int endIndex = endColumnIndex(line, 2);
+        rawIngredientListWithUnitAndAmnt = line.substr(nextIndex, endIndex - nextIndex + 1);
+
+        // Cross reference with column 4 to determine just the ingredient by name
+        nextIndex = jumpColumnIndex(line, 4);
+        endIndex = endColumnIndex(line, 4);
+        rawIngredientList = line.substr(nextIndex, endIndex - nextIndex + 1);
+
+        fillIngredient(rawIngredientListWithUnitAndAmnt, ingredientListWithUnitAndAmnt, rawIngredientList, ingredientList);
         
-        ingredientList = line.substr(nextIndex, endIndex - nextIndex + 1);
-        cout << "Ingredient is the following: " << ingredientList << endl;
+        for(int i = 0; i < ingredientList.size(); ++i){
+            // determine the unit and amount - we will assume the 1) first string of number before it hits the non "/" and nonspace is the amount, 2) everything else is unit
+            // unit = returnUnit(ingredientListWithUnitAndAmnt.at(i) , ingredientList.at(i));
+            amount = returnAmount(ingredientListWithUnitAndAmnt.at(i));
+
+            cout << "Amount is: " << amount << endl;
+
+            // call conversion if necessary
+            // calculate and store into vector
+        }
+
+        // check for problem #1
+        if(ingredientListWithUnitAndAmnt.size() != ingredientList.size()){
+            oddRecipes.push_back(recipeNum);
+        }
 
         inFS.clear();
+        ingredientListWithUnitAndAmnt.clear();
+        ingredientList.clear();
+        ++recipeNum;
     }
 
     /*
@@ -45,11 +85,8 @@ int main(){
     5. Improper units "1 can of Chicken soup"
     */
 
-
-    // convert units
-    // total emission for each recipe & store into vector
-
     inFS.close();
+    enFS.close();
 
     // modify csv files
 
@@ -90,4 +127,75 @@ int endColumnIndex(string line, int targetColumn){
     }
 
     return endIndex;
+}
+
+void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ingredientListWithUnitAndAmnt, string rawIngredientList, vector<string>& ingredientList){
+    string ingredients;
+    // fill Ingredients for ingredientListWithUnitAndAmnt
+    for(int i = 0; i < rawIngredientListWithUnitAndAmnt.size(); ++i){
+        if(rawIngredientListWithUnitAndAmnt.at(i) != '\"' && rawIngredientListWithUnitAndAmnt.at(i) != ','){
+            ingredients.push_back(rawIngredientListWithUnitAndAmnt.at(i));
+        }
+        if(rawIngredientListWithUnitAndAmnt.at(i) == ',' || i == rawIngredientListWithUnitAndAmnt.size() - 1){
+            if(ingredients.at(ingredients.size()-1) == 's'){    // change from plural to singular if applicable
+                ingredients.pop_back();
+            }
+            ++i;
+            ingredientListWithUnitAndAmnt.push_back(ingredients);
+            ingredients.clear();
+        }
+    }
+
+    // fill Ingredients for ingredientList
+    for(int i = 0; i < rawIngredientList.size(); ++i){
+        if(rawIngredientList.at(i) != '\'' && rawIngredientList.at(i) != ','){            
+            ingredients.push_back(rawIngredientList.at(i));
+        }
+        
+        if(rawIngredientList.at(i) == ',' || i == rawIngredientList.size() - 1){
+            if(ingredients.at(ingredients.size()-1) == 's'){    // change from plural to singular if applicable
+                ingredients.pop_back();
+            }
+            ++i;
+            ingredientList.push_back(ingredients);
+            ingredients.clear();
+        }
+    }
+}
+
+double returnAmount(string ingredientWithUnitAndAmnt){
+    int integer = 0, numerator = 0, denominator = 1;
+    int amountSize = 0;
+    bool passedSpace = false;
+
+    // Create a counting system to determine if it's integer(size 2), fraction(size 4), or mixed #s(size 6)
+    for(int i = 0; i < ingredientWithUnitAndAmnt.size() && passedSpace == false; ++i){
+        if(!isalpha(ingredientWithUnitAndAmnt.at(i))){
+            ++amountSize;
+        }
+        else{
+            passedSpace = true;
+        }
+    }
+
+    if(amountSize == 4){
+        numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
+        denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
+    }
+    else if(amountSize == 2 || amountSize == 6){
+        integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
+        if(amountSize == 6){
+            numerator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
+            denominator = stoi(ingredientWithUnitAndAmnt.substr(4, 1));
+        }
+    }
+
+    return static_cast<double>(integer) + static_cast<double>(numerator)/static_cast<double>(denominator);
+}
+
+string returnUnit(string ingredientWithUnitAndAmnt){
+    string unit;
+
+
+    return unit;
 }
