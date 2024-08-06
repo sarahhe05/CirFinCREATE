@@ -17,7 +17,7 @@
   h1 {
     color: #1d0100;
     font-size: 35pt;
-    text-align: left;
+    text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: 'Josefin Sans';
@@ -27,7 +27,6 @@
     text-align: left;
     color: #1d0100;
     font-size: 20pt;
-    padding-top: 10px;
     font-family: 'Josefin Sans';
   }
   
@@ -42,6 +41,10 @@
     font-size: 12pt;
     font-family: 'Josefin Sans';
     color: #1d0100;
+  }
+
+  .light-text{
+    color:#efffda;
   }
 
   /*home*/
@@ -86,6 +89,9 @@
     border: none;
   }
 
+  .landing-button-text{
+    margin: auto;
+  }
   .landing-button:hover {
     background-color: #838b55; /* Green */
     color: #efffda;
@@ -95,20 +101,74 @@
 /*learn*/
   #learn-section{
   padding-top: 150px;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
   background-color: #1d0100;
   }
 
-  .light-text{
-    color:#efffda;
+  #learn-title{
+    text-align: right;
+    margin-right: 10%;
+  }
+
+  #learn-text{
+    text-align: right;
+    margin-left: 50%;
+    margin-right: 10%;
   }
 
 /*recipes*/
   #recipes-section{
-    padding-top: 150px;
-    padding-bottom: 50px;    
+    padding-top: 75px;
+    padding-bottom: 75px;    
     background-color: #c5dca0;
     }
+
+  #recipes-title{
+      text-align: center;
+    }
+
+  #recipes-instructions{
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+
+  .autocomplete-container {
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 50px;
+  }
+  
+  #ingredientSearch {
+      width: 100%;
+      padding: 8px;
+      background-color: #efffda;
+      border-radius: 5px;
+      border-color: #EFFFDA;
+  }
+  
+  .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+  }
+  
+  .tag {
+      background-color: #94AF72;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
+      display: inline-flex;
+      align-items: center;
+  }
+  
+  .tag span {
+      margin-left: 8px;
+      cursor: pointer;
+      color: #1d0100;
+  }
+  
 
   @media (max-width: 600px) {
     .projects-row {
@@ -117,9 +177,47 @@
     }
   }
 
+  #recipes-container{
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  
+  /* Default accordion button background */
+  .accordion-item .accordion-button {
+    background-color: #94AF72;
+    color: #1d0100;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Change background when the accordion is expanded */
+  .accordion-item .accordion-button:not(.collapsed) {
+    background-color: #838B55; /* Active background color */
+    color: #EFFFDA;
+  }
+
+  /* Change color when hover */
+  .accordion-button:hover {
+    background-color: #838B55; /* Active background color */
+    color: #EFFFDA;
+  }
+
+  .accordion-body{
+    color: #EFFFDA;
+  }
+
+  #collapseOne, #collapseTwo{
+    background-color: #838B55;
+    
+  }
+
 /*visualizations*/
   #visualizations-section{
-    padding-top: 150px;
+    padding-top: 75px;
     padding-bottom: 50px;    
     background-color: #3d4026;
+    }
+  
+  .tableauPlaceholder{
+    margin-left: auto;
+    margin-right: auto;
     }
