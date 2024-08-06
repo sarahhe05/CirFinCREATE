@@ -1,0 +1,2 @@
+title,ingredients,directions,NER,valid_ingredient_percentage,carbon
+Phylis' Pineapple-Banana Salad,"[""1 large can chunk pineapple"", ""4 to 5 bananas""]","[""Drain pineapple and reserve juice."", ""Cut bananas in chunks like pineapple.""]","['pineapple', 'bananas']",100.0,0
