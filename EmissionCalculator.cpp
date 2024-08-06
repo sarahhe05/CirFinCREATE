@@ -183,15 +183,16 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
 // More edge cases 
 // 1. three digit 
 // 2. decimal
-// 3. dash between number
+// 3. dash between number 
 // 4. cases like '1 13 cups salt'
+// 5. 'chicken'
 
 double returnAmount(string ingredientWithUnitAndAmnt){
     int integer = 0, numerator = 0, denominator = 1;
     int amountSize = 0;
     bool passedSpace = false;
 
-    // Create a counting system to determine if it's integer(size 2 or 3), fraction(size 4), or mixed #s(size 6)
+    // Create a counting system to determine if it's integer(size <= 3 && size > 1 && no decimal), fraction(size 4), or mixed #s(size 6)
     for(int i = 0; i < ingredientWithUnitAndAmnt.size() && passedSpace == false; ++i){
         if(!isalpha(ingredientWithUnitAndAmnt.at(i))){
             ++amountSize;
@@ -200,6 +201,12 @@ double returnAmount(string ingredientWithUnitAndAmnt){
             passedSpace = true;
         }
     }
+    // We will try to read until space or slash or period
+    // If space = likely integer or mixed # or '1 13 cups salt
+    // Shave off decimal + three digit + dash...
+
+    // To account for edge case 4, we will assume it's either size 4 ('1 2 cup') or size 5 ('1 13 cups'
+    // To dstinguish size 4 fraction, we will simply see if it contain '/'
 
     if(amountSize == 4){
         numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
@@ -248,7 +255,7 @@ void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& 
     // determine if the entry shares the same ingredient between two vectors
 
     for(int i = 0; i < ingredientList.size(); ++i){
-        for(int j = 0; j < ingredientListWithUnitAndAmnt.size(); ++j){
+        for(int j = i; j < ingredientListWithUnitAndAmnt.size(); ++j){
             if(contain(ingredientListWithUnitAndAmnt.at(j), ingredientList.at(i))){
                 if(i != j){
                     string temp = ingredientListWithUnitAndAmnt.at(i);
@@ -258,6 +265,8 @@ void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& 
             }
         }
     }
+    // Change ingredientList so it's in inner loop and ingredientListWithUnitAndAmnt...
+    // Before you perform comparison and, you must always have to sort ingredientList by the great string size...starting at i
 }
 
 bool contain(string inspection, string target){
