@@ -10,6 +10,8 @@ int jumpColumnIndex(string line, int targetColumn);
 void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ingredientListWithUnitAndAmnt, string rawIngredientList, vector<string>& ingredientList);
 double returnAmount(string ingredientWithUnitAndAmnt);
 string returnUnit(string ingredientWithUnitAndAmnt, string ingredient);
+void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& ingredientList);
+bool contain(string inspection, string target);
 
 int main(){
     
@@ -52,7 +54,7 @@ int main(){
         rawIngredientList = line.substr(nextIndex, endIndex - nextIndex + 1);
 
         fillIngredient(rawIngredientListWithUnitAndAmnt, ingredientListWithUnitAndAmnt, rawIngredientList, ingredientList);
-        
+
         for(int i = 0; i < ingredientList.size(); ++i){
             // determine the unit and amount - we will assume the 1) first string of number before it hits the non "/" and nonspace is the amount, 2) everything else is unit
             // unit = returnUnit(ingredientListWithUnitAndAmnt.at(i) , ingredientList.at(i));
@@ -65,6 +67,17 @@ int main(){
             // call conversion if necessary
             // calculate and store into vector
         }
+        
+        
+        // for(int i = 0; i < ingredientList.size(); ++i){
+        //     cout << ingredientList.at(i) << " | ";
+        // }
+        // cout << endl;
+        // for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
+        //     cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
+        // }
+        // cout << endl;
+
 
         // check for problem #1
         if(ingredientListWithUnitAndAmnt.size() != ingredientList.size()){
@@ -82,7 +95,7 @@ int main(){
     1. The ingredient list does not match amount of ingredients in NER
     2. "1 fl oz or 3 cup of Salad Dressing" - double unit options
       - "1 (16 oz) box of Oranges"
-    3. "fl oz" - two worded units
+    3. "fl oz" - two worded units   // I 
     4. Fractional numbers
     5. Improper units "1 can of Chicken soup"
     */
@@ -135,7 +148,7 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
     string ingredients;
     // fill Ingredients for ingredientListWithUnitAndAmnt
     for(int i = 0; i < rawIngredientListWithUnitAndAmnt.size(); ++i){
-        if(rawIngredientListWithUnitAndAmnt.at(i) != '\"' && rawIngredientListWithUnitAndAmnt.at(i) != ','){
+        if(rawIngredientListWithUnitAndAmnt.at(i) != '\'' && rawIngredientListWithUnitAndAmnt.at(i) != ','){
             ingredients.push_back(rawIngredientListWithUnitAndAmnt.at(i));
         }
         if(rawIngredientListWithUnitAndAmnt.at(i) == ',' || i == rawIngredientListWithUnitAndAmnt.size() - 1){
@@ -163,6 +176,9 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
             ingredients.clear();
         }
     }
+
+    sortVectors(ingredientListWithUnitAndAmnt, ingredientList);
+
 }
 
 double returnAmount(string ingredientWithUnitAndAmnt){
@@ -210,14 +226,6 @@ string returnUnit(string ingredientWithUnitAndAmnt, string ingredient){
         }
     }
 
-    int startIndexOfIngredient = -1;
-    for(int i = 0; i < ingredientWithUnitAndAmnt.size() - ingredient.size(); ++i){
-        string checkString = ingredientWithUnitAndAmnt.substr(i, ingredient.size());
-        if(checkString == ingredient){
-           startIndexOfIngredient = i; 
-        }
-    }
-
     if(amountSize == 2){
         unit = ingredientWithUnitAndAmnt.substr(2, ingredientWithUnitAndAmnt.size() - 2 - ingredient.size() - 1);
     }
@@ -229,4 +237,38 @@ string returnUnit(string ingredientWithUnitAndAmnt, string ingredient){
     }
 
     return unit;
+}
+
+void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& ingredientList){
+    // determine if the entry shares the same ingredient between two vectors
+
+    for(int i = 0; i < ingredientList.size(); ++i){
+        for(int j = 0; j < ingredientListWithUnitAndAmnt.size(); ++j){
+            if(contain(ingredientListWithUnitAndAmnt.at(j), ingredientList.at(i))){
+                if(i != j){
+                    string temp = ingredientListWithUnitAndAmnt.at(i);
+                    ingredientListWithUnitAndAmnt.at(i) = ingredientListWithUnitAndAmnt.at(j);
+                    ingredientListWithUnitAndAmnt.at(j) = temp;
+                }
+            }
+        }
+    }
+}
+
+bool contain(string inspection, string target){
+    bool doesContain = false;
+
+    if(inspection.size() < target.size()){
+        doesContain = false;
+    }
+    else{
+        for(int i = 0; i < inspection.size() - target.size() + 1; ++i){
+            // problem: contain accepts that butter is in peanut butter... (a contain issue)
+            string checkString = inspection.substr(i, target.size());
+            if(target == checkString){
+                doesContain = true;
+            }
+        }
+    }
+    return doesContain;
 }
