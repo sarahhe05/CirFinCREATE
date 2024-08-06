@@ -180,13 +180,18 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
     sortVectors(ingredientListWithUnitAndAmnt, ingredientList);
 
 }
+// More edge cases 
+// 1. three digit 
+// 2. decimal
+// 3. dash between number
+// 4. cases like '1 13 cups salt'
 
 double returnAmount(string ingredientWithUnitAndAmnt){
     int integer = 0, numerator = 0, denominator = 1;
     int amountSize = 0;
     bool passedSpace = false;
 
-    // Create a counting system to determine if it's integer(size 2), fraction(size 4), or mixed #s(size 6)
+    // Create a counting system to determine if it's integer(size 2 or 3), fraction(size 4), or mixed #s(size 6)
     for(int i = 0; i < ingredientWithUnitAndAmnt.size() && passedSpace == false; ++i){
         if(!isalpha(ingredientWithUnitAndAmnt.at(i))){
             ++amountSize;
@@ -200,7 +205,7 @@ double returnAmount(string ingredientWithUnitAndAmnt){
         numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
         denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
     }
-    else if(amountSize == 2 || amountSize == 6){
+    else if((amountSize <= 3 && amountSize > 1 ) || amountSize == 6){
         integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
         if(amountSize == 6){
             numerator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
