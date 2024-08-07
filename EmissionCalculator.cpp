@@ -31,8 +31,7 @@ int main(){
         return 1;
     }
 
-    string line, rawIngredientListWithUnitAndAmnt, rawIngredientList;
-    string unit = "unitless";
+    string line, rawIngredientListWithUnitAndAmnt, rawIngredientList, unit = "unitless";
     int recipeNum = 1;
     double amount;
     vector<string> ingredientListWithUnitAndAmnt, ingredientList;
@@ -43,40 +42,33 @@ int main(){
     inFS.clear();
 
     while(getline(inFS, line)){
-        // A function that returns the index of the start of a new column for ingredient column        
-        int nextIndex = jumpColumnIndex(line, 2);
+        int nextIndex = jumpColumnIndex(line, 2);    // A function that returns the index of the start of a new column for ingredient column        
         int endIndex = endColumnIndex(line, 2);
         rawIngredientListWithUnitAndAmnt = line.substr(nextIndex, endIndex - nextIndex + 1);
 
-        // Cross reference with column 4 to determine just the ingredient by name
-        nextIndex = jumpColumnIndex(line, 4);
+        nextIndex = jumpColumnIndex(line, 4);       // Cross reference with column 4 to determine just the ingredient by name
         endIndex = endColumnIndex(line, 4);
         rawIngredientList = line.substr(nextIndex, endIndex - nextIndex + 1);
 
-        fillIngredient(rawIngredientListWithUnitAndAmnt, ingredientListWithUnitAndAmnt, rawIngredientList, ingredientList);
+        fillIngredient(rawIngredientListWithUnitAndAmnt, ingredientListWithUnitAndAmnt, rawIngredientList, ingredientList);     // parse the strings into vectors of strings
 
         for(int i = 0; i < ingredientList.size(); ++i){
-            // determine the unit and amount - we will assume the 1) first string of number before it hits the non "/" and nonspace is the amount, 2) everything else is unit
-            // unit = returnUnit(ingredientListWithUnitAndAmnt.at(i) , ingredientList.at(i));
             amount = returnAmount(ingredientListWithUnitAndAmnt.at(i));
-            
-            // Unit is defaulted to unitless and changes only when tempUnit returns something size > 0
-            unit = returnUnit(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(i));
-            cout << unit << endl;
+            // unit = returnUnit(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(i));        // Unit is defaulted to unitless and changes only when tempUnit returns something size > 0
+            // cout << unit << endl;
 
-            // call conversion if necessary
-            // calculate and store into vector
+            // call conversion if necessary + calculate and store into vector
         }
         
         
-        // for(int i = 0; i < ingredientList.size(); ++i){
-        //     cout << ingredientList.at(i) << " | ";
-        // }
-        // cout << endl;
-        // for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
-        //     cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
-        // }
-        // cout << endl;
+        for(int i = 0; i < ingredientList.size(); ++i){
+            cout << ingredientList.at(i) << " | ";
+        }
+        cout << endl;
+        for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
+            cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
+        }
+        cout << endl;
 
 
         // check for problem #1
@@ -90,20 +82,10 @@ int main(){
         ++recipeNum;
     }
 
-    /*
-    A LIST OF ODD CASE
-    1. The ingredient list does not match amount of ingredients in NER
-    2. "1 fl oz or 3 cup of Salad Dressing" - double unit options
-      - "1 (16 oz) box of Oranges"
-    3. "fl oz" - two worded units   // I 
-    4. Fractional numbers
-    5. Improper units "1 can of Chicken soup"
-    */
-
     inFS.close();
     enFS.close();
 
-    // modify csv files
+    // Write emission value into csv
 
     return 0;
 }
@@ -180,25 +162,33 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
     sortVectors(ingredientListWithUnitAndAmnt, ingredientList);
 
 }
-// More edge cases 
-// 1. three digit 
-// 2. decimal
-// 3. dash between number 
+
+/*
+A LIST OF ODD CASE
+1. The ingredient list does not match amount of ingredients in NER
+2. "1 fl oz or 3 cup of Salad Dressing" - double unit options
+    - "1 (16 oz) box of Oranges"
+3. "fl oz" - two worded units   // I 
+4. Fractional numbers
+5. Improper units "1 can of Chicken soup"
+*/
+
+// More edge cases       // ignoring case 1-3 (three digits, decimal, dash between #) here
 // 4. cases like '1 13 cups salt'
 // 5. 'chicken'
 
 double returnAmount(string ingredientWithUnitAndAmnt){
-    int integer = 0, numerator = 0, denominator = 1;
+    int integer = 1, numerator = 0, denominator = 1;
     int amountSize = 0;
     bool passedSpace = false;
+    bool hasNum = false;
 
-    // Create a counting system to determine if it's integer(size <= 3 && size > 1 && no decimal), fraction(size 4), or mixed #s(size 6)
-    for(int i = 0; i < ingredientWithUnitAndAmnt.size() && passedSpace == false; ++i){
-        if(!isalpha(ingredientWithUnitAndAmnt.at(i))){
+    for(int i = 0; i < ingredientWithUnitAndAmnt.size(); ++i){
+        if(!isalpha(ingredientWithUnitAndAmnt.at(i)) && passedSpace == false){      // Counts # of chars before letter (likely unit) to determine if it's integer (size <= 3), fraction (size 4), mixed #s (size 6), or '1 13 cup' (size 4 w/o slash or 5)
             ++amountSize;
         }
-        else{
-            passedSpace = true;
+        if(isdigit(ingredientWithUnitAndAmnt.at(i)) && passedSpace == false){       // Determine if ingredientWithUnitAndAmnt has numeral => 'chicken' case or not
+            hasNum = true;
         }
     }
     // We will try to read until space or slash or period
@@ -208,15 +198,25 @@ double returnAmount(string ingredientWithUnitAndAmnt){
     // To account for edge case 4, we will assume it's either size 4 ('1 2 cup') or size 5 ('1 13 cups'
     // To dstinguish size 4 fraction, we will simply see if it contain '/'
 
-    if(amountSize == 4){
-        numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
-        denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
-    }
-    else if((amountSize <= 3 && amountSize > 1 ) || amountSize == 6){
-        integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
-        if(amountSize == 6){
-            numerator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
-            denominator = stoi(ingredientWithUnitAndAmnt.substr(4, 1));
+    if(!hasNum){
+        if(amountSize == 4){    
+            if(!contain(ingredientWithUnitAndAmnt, "/")){               // address "1/2 cup"
+                numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
+                denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
+            }
+            else{
+                integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1)) * stoi(ingredientWithUnitAndAmnt.substr(2, 1));  // Address "1 2 cup"
+            }
+        }
+        else if(amountSize == 5){   // address "1 12 cup"
+            integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1)) * stoi(ingredientWithUnitAndAmnt.substr(2, 2));  // Address "1 2 cup"
+        }
+        else if((amountSize <= 3 && amountSize > 1 ) || amountSize == 6){
+            integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1));         // Address "2 cup" and "2 2/4 cup" 
+            if(amountSize == 6){                                            // "2 2/4 cup" 
+                numerator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));   
+                denominator = stoi(ingredientWithUnitAndAmnt.substr(4, 1));
+            }
         }
     }
 
