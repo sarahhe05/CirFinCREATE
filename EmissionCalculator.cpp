@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -10,8 +11,42 @@ int jumpColumnIndex(string line, int targetColumn);
 void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ingredientListWithUnitAndAmnt, string rawIngredientList, vector<string>& ingredientList);
 double returnAmount(string ingredientWithUnitAndAmnt);
 string returnUnit(string ingredientWithUnitAndAmnt, string ingredient);
-void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& ingredientList);
-bool contain(string inspection, string target);
+void sortVectors(vector<string> const ingredientListWithUnitAndAmnt, vector<string>& ingredientList);
+bool doesContain(string const inspection, string const target);
+void sortVectorByStringsize(int i, vector<string>& ingredientList);
+
+double returnCarbonAmount(double ingredientAmount, string unit, double Carbonamount){
+    double recipeCarbonAmount = 0;
+
+    vector<string> units = {"c.", "cup", "tsp.", "lb.", "qt.", "pt.", "Tbsp.", "oz.", "cups"};
+    vector<double> conversionToKg = {
+        0.236588,  // c. (assuming US cup)
+        0.236588,  // cup (assuming US cup)
+        0.00492892,  // tsp.
+        0.453592,  // lb.
+        0.946353,  // qt.
+        0.473176,  // pt.
+        0.0147868,  // Tbsp.
+        0.0295735,  // oz.
+        0.284131  // cups (assuming imperial cup)
+    };
+
+    for(int i = 0; i < units.size(); ++i){
+        if(doesContain(unit, units.at(i))){
+            cout << "INSIDE returnCarbonAmount" << endl;
+            cout << ingredientAmount << endl;
+            cout << Carbonamount << endl;
+            cout << conversionToKg.at(i) << endl;
+            recipeCarbonAmount = ingredientAmount *  Carbonamount * conversionToKg.at(i);
+            cout << "OUTSIDE returnCarbonAmount" << endl;
+        }
+        else{
+            recipeCarbonAmount = recipeCarbonAmount;
+        }
+    }
+
+    return recipeCarbonAmount;
+}
 
 int main(){
     
@@ -31,9 +66,9 @@ int main(){
         return 1;
     }
 
-    string line, rawIngredientListWithUnitAndAmnt, rawIngredientList, unit = "unitless";
+    string line, line2, rawIngredientListWithUnitAndAmnt, rawIngredientList, unit = "unitless";
     int recipeNum = 1;
-    double amount;
+    double amount, carbonamount = 0;
     vector<string> ingredientListWithUnitAndAmnt, ingredientList;
     vector<double> emissionOfEachRecipes;
     vector<int> oddRecipes;
@@ -42,6 +77,7 @@ int main(){
     inFS.clear();
 
     while(getline(inFS, line)){
+        double totalcarbonamount = 0;
         int nextIndex = jumpColumnIndex(line, 2);    // A function that returns the index of the start of a new column for ingredient column        
         int endIndex = endColumnIndex(line, 2);
         rawIngredientListWithUnitAndAmnt = line.substr(nextIndex, endIndex - nextIndex + 1);
@@ -54,27 +90,34 @@ int main(){
 
         for(int i = 0; i < ingredientList.size(); ++i){
             amount = returnAmount(ingredientListWithUnitAndAmnt.at(i));
-            // unit = returnUnit(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(i));        // Unit is defaulted to unitless and changes only when tempUnit returns something size > 0
-            // cout << unit << endl;
-
-            // call conversion if necessary + calculate and store into vector
+            unit = returnUnit(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(i));        // Unit is defaulted to unitless and changes only when tempUnit returns something size > 0
+            
+            while(getline(enFS, line2)){
+                if(doesContain(line2, ingredientList.at(i))){
+                    cout << "Currently at: " << ingredientList.at(i) << endl;
+                    for(int i = 0; i < line2.size();++i){
+                         if(line2.at(i) == ','){
+                             carbonamount = stoi(line2.substr(i + 1, line2.size() - 1));
+                         } 
+                    }
+                    break;
+                }
+            }
+            
+            carbonamount = returnCarbonAmount(amount, unit, carbonamount);
+            totalcarbonamount = totalcarbonamount + carbonamount;
         }
+        cout << totalcarbonamount << endl;
+
         
-        
-        for(int i = 0; i < ingredientList.size(); ++i){
-            cout << ingredientList.at(i) << " | ";
-        }
-        cout << endl;
-        for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
-            cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
-        }
-        cout << endl;
-
-
-        // check for problem #1
-        if(ingredientListWithUnitAndAmnt.size() != ingredientList.size()){
-            oddRecipes.push_back(recipeNum);
-        }
+        // for(int i = 0; i < ingredientList.size(); ++i){
+        //     cout << ingredientList.at(i) << " | ";
+        // }
+        // cout << endl;
+        // for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
+        //     cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
+        // }
+        // cout << endl;
 
         inFS.clear();
         ingredientListWithUnitAndAmnt.clear();
@@ -103,6 +146,12 @@ int jumpColumnIndex(string line, int targetColumn){
                 jumpIndex = i + 3;
             }
         }
+        else if(possibleQuoteBracket == ",[\'"){  // this is the start of a special column
+            ++counterOfQuoteBracket;
+            if(counterOfQuoteBracket == targetColumn - 1){  // this is in context of our dataset
+                jumpIndex = i + 3;
+            }
+        }
     }
 
     return jumpIndex;
@@ -115,10 +164,16 @@ int endColumnIndex(string line, int targetColumn){
     for(int i = 0; i < line.size() - 3 && endIndex == -1; ++i){
         string possibleQuoteBracket = line.substr(i,3);
 
-        if(line.substr(i,3) == "]\","){
+        if(possibleQuoteBracket == "]\"," ){
             counterOfQuoteBracket++;
             if(counterOfQuoteBracket == targetColumn - 1){
                 endIndex = i-1;
+            }
+        }
+        else if(possibleQuoteBracket == "\'],"){
+            counterOfQuoteBracket++;
+            if(counterOfQuoteBracket == targetColumn - 1){
+                endIndex = i;
             }
         }
     }
@@ -160,7 +215,6 @@ void fillIngredient(string rawIngredientListWithUnitAndAmnt, vector<string>& ing
     }
 
     sortVectors(ingredientListWithUnitAndAmnt, ingredientList);
-
 }
 
 /*
@@ -187,6 +241,9 @@ double returnAmount(string ingredientWithUnitAndAmnt){
         if(!isalpha(ingredientWithUnitAndAmnt.at(i)) && passedSpace == false){      // Counts # of chars before letter (likely unit) to determine if it's integer (size <= 3), fraction (size 4), mixed #s (size 6), or '1 13 cup' (size 4 w/o slash or 5)
             ++amountSize;
         }
+        if(isalpha(ingredientWithUnitAndAmnt.at(i))){
+            passedSpace = true;
+        }
         if(isdigit(ingredientWithUnitAndAmnt.at(i)) && passedSpace == false){       // Determine if ingredientWithUnitAndAmnt has numeral => 'chicken' case or not
             hasNum = true;
         }
@@ -198,11 +255,12 @@ double returnAmount(string ingredientWithUnitAndAmnt){
     // To account for edge case 4, we will assume it's either size 4 ('1 2 cup') or size 5 ('1 13 cups'
     // To dstinguish size 4 fraction, we will simply see if it contain '/'
 
-    if(!hasNum){
+    if(hasNum){
         if(amountSize == 4){    
-            if(!contain(ingredientWithUnitAndAmnt, "/")){               // address "1/2 cup"
+            if(doesContain(ingredientWithUnitAndAmnt, "/")){               // address "1/2 cup"
                 numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
                 denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
+                integer = 0;
             }
             else{
                 integer = stoi(ingredientWithUnitAndAmnt.substr(0, 1)) * stoi(ingredientWithUnitAndAmnt.substr(2, 1));  // Address "1 2 cup"
@@ -239,28 +297,45 @@ string returnUnit(string ingredientWithUnitAndAmnt, string ingredient){
     }
 
     if(amountSize == 2){
-        unit = ingredientWithUnitAndAmnt.substr(2, ingredientWithUnitAndAmnt.size() - 2 - ingredient.size() - 1);
+        unit = ingredientWithUnitAndAmnt.substr(2, fabs(ingredientWithUnitAndAmnt.size() - 2 - ingredient.size() - 1));
     }
-    else if(amountSize == 4){
-        unit = ingredientWithUnitAndAmnt.substr(4, ingredientWithUnitAndAmnt.size() - 4 - ingredient.size() - 1);
+    else if(amountSize == 4){ // '1 2 sugar'
+        unit = ingredientWithUnitAndAmnt.substr(4, fabs(ingredientWithUnitAndAmnt.size() - 4 - ingredient.size() - 1));
     }
     else if(amountSize == 6){
-        unit = ingredientWithUnitAndAmnt.substr(6, ingredientWithUnitAndAmnt.size() - 6 - ingredient.size() - 1);
+        unit = ingredientWithUnitAndAmnt.substr(6, fabs(ingredientWithUnitAndAmnt.size() - 6 - ingredient.size() - 1));
     }
 
     return unit;
 }
 
-void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& ingredientList){
+void sortVectorByStringsize(int i, vector<string>& ingredientList){ // i is the startIndex
+
+    for(int j = i; j < ingredientList.size() - 1; ++j){
+        for(int k = i; k < ingredientList.size() - j + i - 1; ++k){
+            if(ingredientList.at(k).size() < ingredientList.at(k + 1).size()){
+                string tempString = ingredientList.at(k);
+                ingredientList.at(k) = ingredientList.at(k + 1);
+                ingredientList.at(k + 1) = tempString;
+            }
+        }
+    }
+}
+
+void sortVectors(vector<string> const ingredientListWithUnitAndAmnt, vector<string>& ingredientList){
     // determine if the entry shares the same ingredient between two vectors
 
-    for(int i = 0; i < ingredientList.size(); ++i){
-        for(int j = i; j < ingredientListWithUnitAndAmnt.size(); ++j){
-            if(contain(ingredientListWithUnitAndAmnt.at(j), ingredientList.at(i))){
+    for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
+        sortVectorByStringsize(i, ingredientList);
+        for(int j = i; j < ingredientList.size(); ++j){
+            if(doesContain(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(j))){
                 if(i != j){
-                    string temp = ingredientListWithUnitAndAmnt.at(i);
-                    ingredientListWithUnitAndAmnt.at(i) = ingredientListWithUnitAndAmnt.at(j);
-                    ingredientListWithUnitAndAmnt.at(j) = temp;
+                    string temp = ingredientList.at(i);
+                    ingredientList.at(i) = ingredientList.at(j);
+                    ingredientList.at(j) = temp;
+                    // cout << "The two swapped: " << ingredientList.at(i) << " $and$ " << ingredientList.at(j) << endl;
+                    // cout << "At index " << i << " of NER it is now: " << ingredientList.at(i) << endl; 
+                    break;
                 }
             }
         }
@@ -269,7 +344,7 @@ void sortVectors(vector<string>& ingredientListWithUnitAndAmnt, vector<string>& 
     // Before you perform comparison and, you must always have to sort ingredientList by the great string size...starting at i
 }
 
-bool contain(string inspection, string target){
+bool doesContain(string const inspection, string const target){
     bool doesContain = false;
 
     if(inspection.size() < target.size()){
