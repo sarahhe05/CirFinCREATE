@@ -6,7 +6,7 @@
   
   @font-face {
     font-family: 'Josefin Sans'; /* Name your font */
-    src: url('/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
+    src: url('/static/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
   }
 
   
@@ -50,7 +50,7 @@
   /*home*/
   #home-section{
     background: linear-gradient(to bottom, transparent 60%, #1d0100), 
-    url('/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
+    url('/static/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
     background-position: 50% 20%;
     background-size: cover;
     }
@@ -114,6 +114,14 @@
     text-align: right;
     margin-left: 50%;
     margin-right: 10%;
+  }
+
+  .big-number{
+    padding-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 120px;
+    color: #efffda;
   }
 
 /*recipes*/
@@ -217,6 +225,23 @@
     background-color: #3d4026;
     }
   
+    .projects-row{
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 3%;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+
+    .projects-column1{
+      object-fit: cover;
+    }
+
+    .projects-column2{
+      object-fit: cover;
+    }
+
   .tableauPlaceholder{
     margin-left: auto;
     margin-right: auto;
