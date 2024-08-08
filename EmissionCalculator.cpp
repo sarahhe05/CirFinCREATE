@@ -16,68 +16,62 @@ bool doesContain(string const inspection, string const target);
 void sortVectorByStringsize(int i, vector<string>& ingredientList);
 
 double returnCarbonAmount(double ingredientAmount, string unit, double Carbonamount){
-    double recipeCarbonAmount = 0;
+    double ingredCarbonAmount = 0;
 
-    vector<string> units = {"c.", "cup", "tsp.", "lb.", "qt.", "pt.", "Tbsp.", "oz.", "cups"};
+    vector<string> units = {"c.", "cup", "tsp.", "lb.", "lb", "Pounds", "qt.", "pt.", "Tbsp.", "oz.", "cups", "kg", "g", "gram", "grams"};
     vector<double> conversionToKg = {
         0.236588,  // c. (assuming US cup)
         0.236588,  // cup (assuming US cup)
         0.00492892,  // tsp.
         0.453592,  // lb.
+        0.453592,  // lb
+        0.453592,  // Pounds
         0.946353,  // qt.
         0.473176,  // pt.
         0.0147868,  // Tbsp.
         0.0295735,  // oz.
-        0.284131  // cups (assuming imperial cup)
+        0.284131,  // cups (assuming imperial cup)
+        1.0, // kg
+        0.0001, // g
+        0.0001, // gram
+        0.0001 // grams
     };
 
     for(int i = 0; i < units.size(); ++i){
         if(doesContain(unit, units.at(i))){
-            cout << "INSIDE returnCarbonAmount" << endl;
-            cout << ingredientAmount << endl;
-            cout << Carbonamount << endl;
-            cout << conversionToKg.at(i) << endl;
-            recipeCarbonAmount = ingredientAmount *  Carbonamount * conversionToKg.at(i);
-            cout << "OUTSIDE returnCarbonAmount" << endl;
-        }
-        else{
-            recipeCarbonAmount = recipeCarbonAmount;
+            ingredCarbonAmount = ingredientAmount *  Carbonamount * conversionToKg.at(i);
+            
+            return ingredCarbonAmount;
         }
     }
-
-    return recipeCarbonAmount;
+    ingredCarbonAmount = Carbonamount;  // because we're assuming it's 1kg, we will not take into account of the amount
+    
+    return ingredCarbonAmount;
 }
 
 int main(){
     
     ifstream inFS;                  // enable read file for recipes.csv / test.csv
-    inFS.open("test.csv");
+    inFS.open("recipes.csv");
 
     if(!inFS.is_open()){            // check for potential open error
         cout << "test.csv cannot be opened" << endl;
         return 1;
     }
 
-    ifstream enFS;                  // enable read file for ingredients.csv
-    enFS.open("ingredients.csv");
-
-    if(!enFS.is_open()){
-        cout << "ingredients.csv cannot be opened" << endl;
-        return 1;
-    }
 
     string line, line2, rawIngredientListWithUnitAndAmnt, rawIngredientList, unit = "unitless";
-    int recipeNum = 1;
+    int recipeNum = 2;
     double amount, carbonamount = 0;
     vector<string> ingredientListWithUnitAndAmnt, ingredientList;
     vector<double> emissionOfEachRecipes;
-    vector<int> oddRecipes;
     
     getline(inFS, line);     // we don't need the headers
     inFS.clear();
 
     while(getline(inFS, line)){
         double totalcarbonamount = 0;
+        string ingre;
         int nextIndex = jumpColumnIndex(line, 2);    // A function that returns the index of the start of a new column for ingredient column        
         int endIndex = endColumnIndex(line, 2);
         rawIngredientListWithUnitAndAmnt = line.substr(nextIndex, endIndex - nextIndex + 1);
@@ -92,33 +86,39 @@ int main(){
             amount = returnAmount(ingredientListWithUnitAndAmnt.at(i));
             unit = returnUnit(ingredientListWithUnitAndAmnt.at(i), ingredientList.at(i));        // Unit is defaulted to unitless and changes only when tempUnit returns something size > 0
             
-            while(getline(enFS, line2)){
-                if(doesContain(line2, ingredientList.at(i))){
-                    cout << "Currently at: " << ingredientList.at(i) << endl;
-                    for(int i = 0; i < line2.size();++i){
-                         if(line2.at(i) == ','){
-                             carbonamount = stoi(line2.substr(i + 1, line2.size() - 1));
-                         } 
-                    }
-                    break;
-                }
+            int currIngreIndex = -1;
+
+            ifstream enFS;                  // enable read file for ingredients.csv
+            enFS.open("ingredients.csv");
+
+            if(!enFS.is_open()){
+                cout << "ingredients.csv cannot be opened" << endl;
+                return 1;
             }
+
+            while(getline(enFS, line2)){
+                ++currIngreIndex;
+                for(int k = 0; k < line2.size();++k){
+                    if(line2.at(k) == ','){
+                        ingre = line2.substr(0, k);
+                        if(ingre == ingredientList.at(i)){
+                            string num = line2.substr(k + 1, line2.size() - ingre.size());
+                            carbonamount = stod(num);
+                        }
+                    }
+                }
+
+                enFS.clear();
+                line2.clear();
+            }
+
+            enFS.close();
             
             carbonamount = returnCarbonAmount(amount, unit, carbonamount);
             totalcarbonamount = totalcarbonamount + carbonamount;
         }
-        cout << totalcarbonamount << endl;
-
-        
-        // for(int i = 0; i < ingredientList.size(); ++i){
-        //     cout << ingredientList.at(i) << " | ";
-        // }
-        // cout << endl;
-        // for(int i = 0; i < ingredientListWithUnitAndAmnt.size(); ++i){
-        //     cout << ingredientListWithUnitAndAmnt.at(i) << " | ";
-        // }
-        // cout << endl;
-
+        emissionOfEachRecipes.push_back(totalcarbonamount);
+    
         inFS.clear();
         ingredientListWithUnitAndAmnt.clear();
         ingredientList.clear();
@@ -126,9 +126,33 @@ int main(){
     }
 
     inFS.close();
-    enFS.close();
 
     // Write emission value into csv
+    
+    ofstream file("carbon.csv"); 
+    if (file.fail()) {
+        cout << "Failed to open the file." << endl;
+        return false;
+    }
+
+    for (const auto& emission : emissionOfEachRecipes) {
+        file << emission << endl;
+    }
+
+    if (file.is_open()) {
+        file.close();
+        if (!file) {
+            cout << "Failed to close the file." << endl;
+        } 
+        else {
+            cout << "File closed successfully." << endl;
+        }
+    } 
+    else {
+        cout << "File is not open. Cannot close it." << endl;
+    }
+
+    cout << "Last value: " << emissionOfEachRecipes.at(emissionOfEachRecipes.size() - 1) << endl;
 
     return 0;
 }
@@ -256,7 +280,10 @@ double returnAmount(string ingredientWithUnitAndAmnt){
     // To dstinguish size 4 fraction, we will simply see if it contain '/'
 
     if(hasNum){
-        if(amountSize == 4){    
+        if(amountSize == 3){
+            integer = stoi(ingredientWithUnitAndAmnt.substr(0, 2));
+        }
+        else if(amountSize == 4){    
             if(doesContain(ingredientWithUnitAndAmnt, "/")){               // address "1/2 cup"
                 numerator = stoi(ingredientWithUnitAndAmnt.substr(0, 1));
                 denominator = stoi(ingredientWithUnitAndAmnt.substr(2, 1));
@@ -333,8 +360,7 @@ void sortVectors(vector<string> const ingredientListWithUnitAndAmnt, vector<stri
                     string temp = ingredientList.at(i);
                     ingredientList.at(i) = ingredientList.at(j);
                     ingredientList.at(j) = temp;
-                    // cout << "The two swapped: " << ingredientList.at(i) << " $and$ " << ingredientList.at(j) << endl;
-                    // cout << "At index " << i << " of NER it is now: " << ingredientList.at(i) << endl; 
+                    
                     break;
                 }
             }

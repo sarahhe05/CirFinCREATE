@@ -1,3 +1,0 @@
-title,ingredients,directions,NER,valid ingredient count,carbon
-Crazy Peanut Butter Cookies,"['1 c. creamy peanut butter', '1 c. sugar', '1 egg']","['Mix together and roll into balls; flatten with fork.', 'Bake on ungreased cookie sheet.', 'Makes 2 dozen.', 'Quick, easy and good.']","['egg', 'peanut butter', 'sugar']",3,0
-Donah'S Coffee Milk,"['1/2 c. brewed coffee', '1/2 c. milk', '2 tsp. sugar']","['Pour 1/2 cup coffee into a coffee mug.', 'Pour in the milk.', 'Add the sugar.', 'Stir.']","['coffee', 'sugar', 'milk']",3,0
