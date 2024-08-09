@@ -19,14 +19,14 @@ int main(int argc, char* argv[]) {
     // keep track of the top of 5 (at most) recipe with least carbon amount
     // print results
     vector<string> ingredientOfSearch;
-    ifstream inFS("test.csv");
+    ifstream inFS("recipes.csv");
     
     if(!inFS.is_open()){            // check for potential open error
         cout << "recipes.csv cannot be opened" << endl;
         return 1;
     }
 
-    string checkStatus = argv[2];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
+    // string checkStatus = argv[2];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
 
     // offload the ingredients of search into vector
     for(int i = 3; i < argc; ++i){
@@ -35,6 +35,9 @@ int main(int argc, char* argv[]) {
     
     string line5;
     // recipe FirstLeastEmission, SecondLeastEmission, ThirdLeastEmission, FourthLeastEmission, FifthLeastEmission;
+    getline(inFS, line5);
+    line5.clear();
+
     while(getline(inFS, line5)){
         vector<string> cleanNER;
         string rawNER = getColumnInfo(line5, 4);
@@ -49,18 +52,21 @@ int main(int argc, char* argv[]) {
         //     cout << "Item " << i + 1<< ": " << cleanIngredient.at(i) << endl;
         // }
         
-        // string rawdirection = getColumnInfo(line5, 3);
-        // vector<string> cleanDirections;
-        // fillVector(rawdirection, cleanDirections);
+        string rawdirection = getColumnInfo(line5, 3);
+        vector<string> cleanDirections;
+        fillVector(rawdirection, cleanDirections);
 
-        // for(int i = 0; i < cleanDirections.size(); ++i){
-        //     cout << "Item " << i + 1<< ": " << cleanDirections.at(i) << endl;
-        // }
-
+        for(int i = 0; i < cleanDirections.size(); ++i){
+            cout << "Item " << i + 1 << ": " << cleanDirections.at(i) << endl;
+        }
+        
         // extract rawNER into vector NER
-
+        line5.clear();
     }
+    cout << endl;
+    inFS.clear();
 
+    inFS.close();
 
     return 0;
 }
