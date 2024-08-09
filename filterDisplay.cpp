@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-// #include "recipe.hpp"
+#include "recipe.h"
 
 using namespace std;
 
@@ -13,12 +13,14 @@ int endColumnIndex(string line, int targetColumn);
 void fillVector(string data, vector<string>& cleanVector);
 
 
+
 int main(int argc, char* argv[]) {
     // reads recipes.csv
     // takes in ingreidnets of research
     // keep track of the top of 5 (at most) recipe with least carbon amount
     // print results
     vector<string> ingredientOfSearch;
+    vector<recipe> recipeLeastEmission;
     ifstream inFS("recipes.csv");
     
     if(!inFS.is_open()){            // check for potential open error
@@ -26,15 +28,16 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // string checkStatus = argv[2];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
+    string checkStatus = argv[1];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
 
     // offload the ingredients of search into vector
-    for(int i = 3; i < argc; ++i){
+    for(int i = 2; i < argc; ++i){
         ingredientOfSearch.push_back(argv[i]);
     }
     
     string line5;
-    // recipe FirstLeastEmission, SecondLeastEmission, ThirdLeastEmission, FourthLeastEmission, FifthLeastEmission;
+
+    int recipeCount = 0;
     getline(inFS, line5);
     line5.clear();
 
@@ -42,31 +45,36 @@ int main(int argc, char* argv[]) {
         vector<string> cleanNER;
         string rawNER = getColumnInfo(line5, 4);
         fillVector(rawNER, cleanNER);
-        double carbonEmissionAmt = stod(getColumnInfo(line5, 6));
 
-        // string rawIngredient = getColumnInfo(line5, 2);
-        // vector<string> cleanIngredient;
-        // fillVector(rawIngredient, cleanIngredient);
+        if(inVector(cleanNER, ingredientOfSearch, checkStatus) && recipeCount != 5){
+            
+            double carbonEmissionAmt = stod(getColumnInfo(line5, 6));
 
-        // for(int i = 0; i < cleanIngredient.size(); ++i){
-        //     cout << "Item " << i + 1<< ": " << cleanIngredient.at(i) << endl;
-        // }
-        
-        string rawdirection = getColumnInfo(line5, 3);
-        vector<string> cleanDirections;
-        fillVector(rawdirection, cleanDirections);
+            string title = getColumnInfo(line5, 1);
+            
+            string rawdirection = getColumnInfo(line5, 3);
+            vector<string> cleanDirections;
+            fillVector(rawdirection, cleanDirections);
 
-        for(int i = 0; i < cleanDirections.size(); ++i){
-            cout << "Item " << i + 1 << ": " << cleanDirections.at(i) << endl;
+            string rawIngredient = getColumnInfo(line5, 2);
+            vector<string> cleanIngredient;
+            fillVector(rawIngredient, cleanIngredient);
+
+            recipe temp = recipe(title, cleanIngredient, cleanDirections, carbonEmissionAmt);
+            recipeLeastEmission.push_back(temp);
+            ++recipeCount;
         }
-        
-        // extract rawNER into vector NER
         line5.clear();
     }
     cout << endl;
     inFS.clear();
 
     inFS.close();
+
+    for(int i = 0; i < recipeLeastEmission.size(); ++i){
+        recipeLeastEmission.at(i).display();
+        cout << endl;
+    }
 
     return 0;
 }
@@ -85,6 +93,9 @@ bool inVector(vector<string> const NER, vector<string> const search, string chec
             if(NER.at(j) == search.at(i)){
                 isIn = true;
             }
+        }
+        if(isIn == false){
+            break;
         }
     }
     return isIn;
