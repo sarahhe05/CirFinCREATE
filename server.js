@@ -3,10 +3,10 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'Public'))); //ensures that Express server is correctly set up to serve static files, such as CSS files
+app.use(express.static(path.join(__dirname, 'static'))); //ensures that Express server is correctly set up to serve static files, such as CSS files
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'templates/index.html'));
 }
 );
 
