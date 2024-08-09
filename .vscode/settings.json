@@ -8,6 +8,13 @@
         "initializer_list": "cpp",
         "utility": "cpp",
         "string": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "vector": "cpp",
+        "unordered_map": "cpp",
+        "__split_buffer": "cpp",
+        "list": "cpp",
+        "__hash_table": "cpp",
+        "bitset": "cpp",
+        "ios": "cpp"
     }
 }
