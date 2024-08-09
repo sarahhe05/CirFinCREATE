@@ -43,4 +43,25 @@ $(document).ready(function() {
             displaySelectedIngredients();
         }
     }
+
+    // Handle form submission
+    $('#ingredientForm').submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Send the selected ingredients to the backend using AJAX
+        $.ajax({
+            url: '/submit', // Flask endpoint
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ ingredients: selectedValues }),
+            success: function(response) {
+                console.log('Success:', response);
+                // Optionally handle success, e.g., show a success message
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                // Optionally handle error
+            }
+        });
+    });
 });

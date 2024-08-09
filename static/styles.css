@@ -140,7 +140,6 @@
     margin-right: 20%;
   }
 
-
   .autocomplete-container {
       width: 300px;
       margin-left: auto;
@@ -148,6 +147,11 @@
       padding-bottom: 50px;
   }
   
+  .submit-button{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   #ingredientSearch {
       width: 100%;
       padding: 8px;

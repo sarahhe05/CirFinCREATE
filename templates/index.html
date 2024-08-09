@@ -60,11 +60,28 @@
            and scrambled it to make a type specimen book. It has survived not only five centuries, but also
             the leap into electronic typesetting, remaining essentially unchanged. </p>
         
-        <div class="autocomplete-container">
-          <input type="text" id="ingredientSearch" placeholder="Search ingredients...">
-          <div id="selectedIngredients" class="tags-container"></div>
-        </div>      
-      
+            <div class="inner-container">
+              <form action="/submit" method="post">
+              
+                <div class="autocomplete-container">
+                  <input type="text" id="ingredientSearch" placeholder="Search ingredients...">
+                  <div id="selectedIngredients" class="tags-container"></div>
+
+                  <label>
+                    <input type="checkbox" name="exact-checkbox">
+                    Exact ingredients
+                  </label>
+
+                  <p>{{selectedValues}}</p>
+
+                  <!-- Submit button-->
+                  <input class="submit-button" type="submit" value="Submit">
+                </div>
+                
+                
+              </form>
+          </div>
+        
 
         <div class="accordion" id="recipes-container">
           
