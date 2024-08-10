@@ -5,8 +5,8 @@
   }
   
   @font-face {
-    font-family: 'Josefin Sans'; /* Name your font */
-    src: url('/static/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
+    font-family: 'Heco'; /* Name your font */
+    src: url('/static/heco/Heco.ttf'); /* URL to your font file */
   }
 
   
@@ -20,26 +20,26 @@
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-family: 'Josefin Sans';
+    font-family: 'Heco';
   }
   
   h2 {
     text-align: left;
     color: #1d0100;
     font-size: 20pt;
-    font-family: 'Josefin Sans';
+    font-family: 'Heco';
   }
   
   h3{
     text-align: left;
     color: #1d0100;
     font-size: 12pt;
-    font-family: 'Josefin Sans';
+    font-family: 'Heco';
   }
 
   p {
     font-size: 12pt;
-    font-family: 'Josefin Sans';
+    font-family: 'Heco';
     color: #1d0100;
   }
 
@@ -100,21 +100,26 @@
 
 /*learn*/
   #learn-section{
-  padding-top: 150px;
+  padding-top: 120px;
   padding-bottom: 75px;
   background-color: #1d0100;
   }
 
   #learn-title{
-    text-align: right;
-    margin-right: 10%;
+    text-align: center;
   }
 
   #learn-text{
-    text-align: right;
-    margin-left: 50%;
+    text-align: center;
+    margin-left: 10%;
     margin-right: 10%;
+    padding-bottom: 50px;
   }
+  
+  .tableau-container{
+    margin-left: 10%;
+    margin-right: 10%;
+    }
 
   .big-number{
     padding-top: 150px;
@@ -141,13 +146,28 @@
   }
 
   .autocomplete-container {
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50px;
+  }
+ 
+  #exact-checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  label {
+    display: inline-flex;
+    align-items: center; /* Vertically center the checkbox and text */
   }
   
-  .submit-button{
+  input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and text */
+  }
+
+  .submit-button {
     margin-left: auto;
     margin-right: auto;
   }
@@ -221,32 +241,3 @@
     background-color: #838B55;
     
   }
-
-/*visualizations*/
-  #visualizations-section{
-    padding-top: 75px;
-    padding-bottom: 50px;    
-    background-color: #3d4026;
-    }
-  
-    .projects-row{
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 3%;
-      margin-left: 10%;
-      margin-right: 10%;
-    }
-
-    .projects-column1{
-      object-fit: cover;
-    }
-
-    .projects-column2{
-      object-fit: cover;
-    }
-
-  .tableauPlaceholder{
-    margin-left: auto;
-    margin-right: auto;
-    }
