@@ -15,6 +15,7 @@
         "list": "cpp",
         "__hash_table": "cpp",
         "bitset": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "istream": "cpp"
     }
 }
