@@ -15,6 +15,9 @@ recipe::recipe(){
 
 recipe::recipe(string t, vector<string> i, vector<string> d, double c): title(t), ingredients(i), directions(d), carbon(c){}
 
+void recipe::DisplayCarbon() const{
+    cout << carbon;
+}
 
 void recipe::display() const{
     // cout << title << endl;

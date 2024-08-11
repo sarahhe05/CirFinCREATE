@@ -6,7 +6,7 @@
   
   @font-face {
     font-family: 'Josefin Sans'; /* Name your font */
-    src: url('/static/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
+    src: url('/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
   }
 
   
@@ -50,7 +50,7 @@
   /*home*/
   #home-section{
     background: linear-gradient(to bottom, transparent 60%, #1d0100), 
-    url('/static/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
+    url('/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
     background-position: 50% 20%;
     background-size: cover;
     }
@@ -217,7 +217,7 @@
     color: #EFFFDA;
   }
 
-  #collapseOne, #collapseTwo{
+  #collapse1, #collapse2, #collapse3, #collapse4, #collapse5{
     background-color: #838B55;
     
   }
