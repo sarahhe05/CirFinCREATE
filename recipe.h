@@ -17,6 +17,7 @@ class recipe {
     public:
       recipe();
       recipe(string t, vector<string> i, vector<string> d, double c);
+      void DisplayCarbon() const;
       void display() const;
 
       void setTitle(string t);

@@ -28,10 +28,12 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    string checkStatus = argv[1];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
+    //string checkStatus = argv[1];       // tells us if the checkbox is checked. If it's checked, then the search must match exactly, down to the size
+
+    string checkStatus = "unchecked"; 
 
     // offload the ingredients of search into vector
-    for(int i = 2; i < argc; ++i){
+    for(int i = 1; i < argc; ++i){
         ingredientOfSearch.push_back(argv[i]);
     }
     
@@ -71,10 +73,12 @@ int main(int argc, char* argv[]) {
 
     inFS.close();
 
+
     for(int i = 0; i < recipeLeastEmission.size(); ++i){
         recipeLeastEmission.at(i).display();
-        cout << endl;
+        cout << "##";
     }
+
 
     return 0;
 }
