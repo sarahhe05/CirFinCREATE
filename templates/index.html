@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="/static/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/styles.css"/>
+    <script src="/static/script.js" defer></script>
 
     <title>ECOMENU</title>
 </head>
@@ -37,28 +37,52 @@
       <section id='learn-section'>
 
         <h1 class='light-text' id='learn-title'> Carbon Footprint </h1>
-            <p class='light-text' id='learn-text'> A lot of words! What is Lorem Ipsum?
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-               industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-               and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-                 1960s with the release of Letraset sheets 
-              containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-              Aldus PageMaker including versions of Lorem Ipsum.</p>
-          
-              <h1 class='big-number'> 16 tons </h1>
+            
+                           
+          <p class='light-text' id='learn-text'> A carbon footprint measures the greenhouse gas emissions (primarily carbon dioxide) that are produced 
+            by human activities. These emissions contribute to climate change by trapping heat in the Earth's atmosphere, leading to rising 
+            global temperatures and disruptions to ecosystems. The carbon footprint impacts our daily lives by affecting food security, health, 
+            and the environment. Reducing our carbon footprint is essential to ensure a sustainable future for generations to come. By making 
+            conscious choices in energy use and consumption, we can collectively lower our impact on the planet.</p>
+
+              <div class='tableau-container'>                    
+                <div class='tableauPlaceholder' id='viz1723272569977'>                
+                  <object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
+                    <param name='name' value='CirFinCREATE&#47;GlobalTemperatureDifferencefromthe1951to1980Average' />
+                    <param name='tabs' value='no' /><param name='toolbar' value='yes' />
+                    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ci&#47;CirFinCREATE&#47;GlobalTemperatureDifferencefromthe1951to1980Average&#47;1.png' />
+                    <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                    <param name='filter' value='publish=yes' />
+                  </object>                    
+                </div>
+                          
+                <script type='text/javascript'>
+                  var divElement = document.getElementById('viz1723272569977');
+                  var vizElement = divElement.getElementsByTagName('object')[0];
+                  vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.35)+'px';
+                  var scriptElement = document.createElement('script');
+                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+
+                <p class='light-text' id='tableau-caption'> Earth's average surface temperature in 2023 was the warmest on record since 1880. </p>
+              </div>
 
       </section>
       
+      <div class="wave-border"></div>
+
       <!--recipes-->
       <section id='recipes-section'>
 
         <h1 id='recipes-title'> Explore Recipes </h1>
-        <p id='recipes-instructions'> A lot of words! What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-           industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-           and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-            the leap into electronic typesetting, remaining essentially unchanged. </p>
+        <p id='recipes-instructions'> Enter the ingredients you have or want to use into the search bar, and receive sustainable recipes 
+          that incorporate these ingredients. Whether you're looking to reduce food waste or cook eco-friendly meals, 
+          this tool makes it easy to find delicious recipes that align with your environmental values. Just type, search, and start cooking! </p>
         
             <div class="inner-container">
               <form action="/submit" method="post">
@@ -67,48 +91,54 @@
                   <input type="text" id="ingredientSearch" placeholder="Search ingredients...">
                   <div id="selectedIngredients" class="tags-container"></div>
 
-                  <label>
-                    <input type="checkbox" name="exact-checkbox">
-                    Exact ingredients
-                  </label>
+                  <div id='exact-checkbox-container'>
+                    <label>
+                      <input type="checkbox">
+                      <span><p>Exact ingredients</p></span>
+                    </label>
+                  </div>
 
-                  <p>{{selectedValues}}</p>
-
-                  <!-- Submit button-->
-                  <input class="submit-button" type="submit" value="Submit">
                 </div>
-                
-                
+              
               </form>
-          </div>
+            </div>
         
 
         <div class="accordion" id="recipes-container">
           
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Recipe Number One
+                <h3>Recipe Number One</h3>
               </button>
-            </h2>
+            </h3>
 
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#recipes-container">
               <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <p class='light-text'><strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. 
+                  These classes control the overall appearance, as well as the showing and hiding via CSS transitions. 
+                  You can modify any of this with custom CSS or overriding our default variables. 
+                  It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, 
+                  though the transition does limit overflow. </p>
               </div>
             </div>
 
           </div>
 
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Recipe Number Two
+                <h3>Recipe Number Two</h3>
               </button>
-            </h2>
+            </h3>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#recipes-container">
               <div class="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <p class='light-text'><strong>This is the second item's accordion body.</strong> 
+                  It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                   These classes control the overall appearance, as well as the showing and hiding via CSS transitions. 
+                   You can modify any of this with custom CSS or overriding our default variables. 
+                   It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, 
+                   though the transition does limit overflow.</p>
               </div>
             </div>
           </div>
@@ -117,61 +147,5 @@
 
 
       </section>
-
-      <!--visualizations-->
-      <section id='visualizations-section'>
-
-        <h1 class='light-text'> Visualizations </h1>
-        <p class='light-text'> A lot of words! What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-           industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-           and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-            the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-             1960s with the release of Letraset sheets 
-          containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-          Aldus PageMaker including versions of Lorem Ipsum.</p>
-        
-        <div class='projects-row'>
-
-          <!--San Diego Crime Analysis-->
-            <div class='projects-column1'>
-              <h2> Title </h2>
-            
-            <div class='projects-column2'>
-              
-          <div class='tableauPlaceholder' id='viz1722897029792' style='position: relative'><noscript><a href='#'>
-            <img alt='Starry Sticker Shop Sales Analysis ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;
-            Starry-Sticker-Shop-Analysis&#47;StarryStickerShopSalesAnalysis&#47;1_rss.png' style='border: none' />
-          </a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-            <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
-            <param name='name' value='Starry-Sticker-Shop-Analysis&#47;StarryStickerShopSalesAnalysis' />
-            <param name='tabs' value='no' />
-            <param name='toolbar' value='yes' />
-            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;Starry-Sticker-Shop-Analysis&#47;
-              StarryStickerShopSalesAnalysis&#47;1.png' />
-            <param name='animate_transition' value='yes' />
-            <param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' />
-            <param name='display_overlay' value='yes' /><param name='display_count' value='yes' />
-            <param name='language' value='en-US' /></object></div>                
-            <script type='text/javascript'>
-              var divElement = document.getElementById('viz1722897029792');       
-              var vizElement = divElement.getElementsByTagName('object')[0];              
-                if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1400px'; vizElement.style.height='827px';}
-                else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1400px';vizElement.style.height='827px';}
-                else { vizElement.style.width='100%';vizElement.style.height='2127px';}          
-              var scriptElement = document.createElement('script');               
-                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement); </script>
-  </div>
-            
-
-          </div>
-        
-          
-          
-        </div>
-
-        
-      </section>
-    
 </body>
 </html>

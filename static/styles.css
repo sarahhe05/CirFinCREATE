@@ -5,8 +5,8 @@
   }
   
   @font-face {
-    font-family: 'Josefin Sans'; /* Name your font */
-    src: url('/Josefin_Sans/JosefinSans-VariableFont_wght.ttf'); /* URL to your font file */
+    font-family: 'Oswald'; /* Name your font */
+    src: url('/static/Oswald-Regular.ttf'); /* URL to your font file */
   }
 
   
@@ -20,26 +20,26 @@
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-family: 'Josefin Sans';
+    font-family: 'Oswald';
   }
   
   h2 {
     text-align: left;
     color: #1d0100;
     font-size: 20pt;
-    font-family: 'Josefin Sans';
+    font-family: 'Oswald';
   }
   
   h3{
     text-align: left;
     color: #1d0100;
-    font-size: 12pt;
-    font-family: 'Josefin Sans';
+    font-size: 18pt;
+    font-family: 'Oswald';
   }
 
   p {
-    font-size: 12pt;
-    font-family: 'Josefin Sans';
+    font-size: 14pt;
+    font-family: 'Oswald';
     color: #1d0100;
   }
 
@@ -54,7 +54,6 @@
     background-position: 50% 20%;
     background-size: cover;
     }
-
 
   #ecomenu{
     padding-top: 350px;
@@ -97,36 +96,44 @@
     color: #efffda;
   }
 
-
 /*learn*/
   #learn-section{
-  padding-top: 150px;
-  padding-bottom: 75px;
+  padding-top: 100px;
+  padding-bottom: 25px;
   background-color: #1d0100;
   }
 
   #learn-title{
-    text-align: right;
-    margin-right: 10%;
+    text-align: center;
   }
 
   #learn-text{
-    text-align: right;
-    margin-left: 50%;
+    text-align: center;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-bottom: 50px;
+  }
+  
+  .tableau-container{
+    margin-left: 10%;
     margin-right: 10%;
+    }
+
+  #tableau-caption {
+    padding-top: 10px;
+    text-align: right;
   }
 
-  .big-number{
-    padding-top: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 120px;
-    color: #efffda;
+  .wave-border {
+    background-image: url('/static/transition.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px; /* Adjust according to your image's height */
+    margin-top: -150px; /* Adjust to create a seamless transition */
   }
 
 /*recipes*/
   #recipes-section{
-    padding-top: 75px;
     padding-bottom: 75px;    
     background-color: #c5dca0;
     }
@@ -141,13 +148,28 @@
   }
 
   .autocomplete-container {
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50px;
+  }
+ 
+  #exact-checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  label {
+    display: inline-flex;
+    align-items: center; /* Vertically center the checkbox and text */
   }
   
-  .submit-button{
+  input[type="checkbox"] {
+    margin-right: 5px; /* Space between checkbox and text */
+  }
+
+  .submit-button {
     margin-left: auto;
     margin-right: auto;
   }
@@ -221,32 +243,3 @@
     background-color: #838B55;
     
   }
-
-/*visualizations*/
-  #visualizations-section{
-    padding-top: 75px;
-    padding-bottom: 50px;    
-    background-color: #3d4026;
-    }
-  
-    .projects-row{
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 3%;
-      margin-left: 10%;
-      margin-right: 10%;
-    }
-
-    .projects-column1{
-      object-fit: cover;
-    }
-
-    .projects-column2{
-      object-fit: cover;
-    }
-
-  .tableauPlaceholder{
-    margin-left: auto;
-    margin-right: auto;
-    }
