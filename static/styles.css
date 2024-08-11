@@ -50,7 +50,7 @@
   /*home*/
   #home-section{
     background: linear-gradient(to bottom, transparent 60%, #1d0100), 
-    url('/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
+    url('/static/ghows-MO-6866539b-7cea-47d7-e053-0100007ff105-7ca3f2b1.webp') no-repeat center center;
     background-position: 50% 20%;
     background-size: cover;
     }
