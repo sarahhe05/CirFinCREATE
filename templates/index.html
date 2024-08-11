@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="/static/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/styles.css"/>
+    <script src="/static/script.js" defer></script>
 
     <title>ECOMENU</title>
 </head>
@@ -39,16 +39,11 @@
         <h1 class='light-text' id='learn-title'> Carbon Footprint </h1>
             
                            
-          <p class='light-text' id='learn-text'> A lot of words! What is Lorem Ipsum?
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                   industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-                   and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-                    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
-                     1960s with the release of Letraset sheets 
-                  containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                  Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-                  
+          <p class='light-text' id='learn-text'> A carbon footprint measures the greenhouse gas emissions (primarily carbon dioxide) that are produced 
+            by human activities. These emissions contribute to climate change by trapping heat in the Earth's atmosphere, leading to rising 
+            global temperatures and disruptions to ecosystems. The carbon footprint impacts our daily lives by affecting food security, health, 
+            and the environment. Reducing our carbon footprint is essential to ensure a sustainable future for generations to come. By making 
+            conscious choices in energy use and consumption, we can collectively lower our impact on the planet.</p>
 
               <div class='tableau-container'>                    
                 <div class='tableauPlaceholder' id='viz1723272569977'>                
@@ -73,22 +68,21 @@
                   scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                   vizElement.parentNode.insertBefore(scriptElement, vizElement);
                 </script>
+
+                <p class='light-text' id='tableau-caption'> Earth's average surface temperature in 2023 was the warmest on record since 1880. </p>
               </div>
-              
-              <h1 class='big-number'> 16 tons </h1>
-            
 
       </section>
       
+      <div class="wave-border"></div>
+
       <!--recipes-->
       <section id='recipes-section'>
 
         <h1 id='recipes-title'> Explore Recipes </h1>
-        <p id='recipes-instructions'> A lot of words! What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-           industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-           and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-            the leap into electronic typesetting, remaining essentially unchanged. </p>
+        <p id='recipes-instructions'> Enter the ingredients you have or want to use into the search bar, and receive sustainable recipes 
+          that incorporate these ingredients. Whether you're looking to reduce food waste or cook eco-friendly meals, 
+          this tool makes it easy to find delicious recipes that align with your environmental values. Just type, search, and start cooking! </p>
         
             <div class="inner-container">
               <form action="/submit" method="post">
@@ -100,7 +94,7 @@
                   <div id='exact-checkbox-container'>
                     <label>
                       <input type="checkbox">
-                      <span>Exact ingredients</span>
+                      <span><p>Exact ingredients</p></span>
                     </label>
                   </div>
 
@@ -113,11 +107,11 @@
         <div class="accordion" id="recipes-container">
           
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Recipe Number One
+                <h3>Recipe Number One</h3>
               </button>
-            </h2>
+            </h3>
 
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#recipes-container">
               <div class="accordion-body">
@@ -132,11 +126,11 @@
           </div>
 
           <div class="accordion-item">
-            <h2 class="accordion-header">
+            <div class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Recipe Number Two
+                <h3>Recipe Number Two</h3>
               </button>
-            </h2>
+            </h3>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#recipes-container">
               <div class="accordion-body">
                 <p class='light-text'><strong>This is the second item's accordion body.</strong> 

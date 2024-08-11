@@ -5,8 +5,8 @@
   }
   
   @font-face {
-    font-family: 'Heco'; /* Name your font */
-    src: url('/static/heco/Heco.ttf'); /* URL to your font file */
+    font-family: 'Oswald'; /* Name your font */
+    src: url('/static/Oswald-Regular.ttf'); /* URL to your font file */
   }
 
   
@@ -20,26 +20,26 @@
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-family: 'Heco';
+    font-family: 'Oswald';
   }
   
   h2 {
     text-align: left;
     color: #1d0100;
     font-size: 20pt;
-    font-family: 'Heco';
+    font-family: 'Oswald';
   }
   
   h3{
     text-align: left;
     color: #1d0100;
-    font-size: 12pt;
-    font-family: 'Heco';
+    font-size: 18pt;
+    font-family: 'Oswald';
   }
 
   p {
-    font-size: 12pt;
-    font-family: 'Heco';
+    font-size: 14pt;
+    font-family: 'Oswald';
     color: #1d0100;
   }
 
@@ -54,7 +54,6 @@
     background-position: 50% 20%;
     background-size: cover;
     }
-
 
   #ecomenu{
     padding-top: 350px;
@@ -97,11 +96,10 @@
     color: #efffda;
   }
 
-
 /*learn*/
   #learn-section{
-  padding-top: 120px;
-  padding-bottom: 75px;
+  padding-top: 100px;
+  padding-bottom: 25px;
   background-color: #1d0100;
   }
 
@@ -111,8 +109,8 @@
 
   #learn-text{
     text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     padding-bottom: 50px;
   }
   
@@ -121,17 +119,21 @@
     margin-right: 10%;
     }
 
-  .big-number{
-    padding-top: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 120px;
-    color: #efffda;
+  #tableau-caption {
+    padding-top: 10px;
+    text-align: right;
+  }
+
+  .wave-border {
+    background-image: url('/static/transition.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px; /* Adjust according to your image's height */
+    margin-top: -150px; /* Adjust to create a seamless transition */
   }
 
 /*recipes*/
   #recipes-section{
-    padding-top: 75px;
     padding-bottom: 75px;    
     background-color: #c5dca0;
     }
