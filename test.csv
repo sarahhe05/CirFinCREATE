@@ -1,3 +1,0 @@
-title,ingredients,directions,NER,valid ingredient count,carbon
-Cran-Orange Punch,"['1 gal. cranberry juice', '1 gal. orange juice']","['Mix juice and serve over ice cream.', 'A sprig of fresh mint completes this beverage.', 'Yield:', '2 gallons.']","['orange juice', 'cranberry juice']",2,0.0003341
-Simple Punch,"['1 large can pineapple juice', '1 large can orange juice', '1 large bottle apple juice']","['Mix and keep in refrigerator; before serving, add 1 quart ginger ale.', 'Stir well.']","['pineapple juice', 'apple juice', 'orange juice']",3,0.0006081
