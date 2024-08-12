@@ -1,4 +1,5 @@
 
 data files/recipes_data.csv
 a.out
-./filterDisplay
+filterDisplay
+filterDisplay.exe
