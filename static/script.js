@@ -431,6 +431,10 @@ $(document).ready(function() {
         // Loop through each result and create an accordion item
         results.forEach((item, index) => {
             const collapseId = `collapse${index+1}`;
+            
+            //Formats ingredients and directions as Lists
+            const ingredientsList = item.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
+            const directionsList = item.directions.map(direction => `<li>${direction}</li>`).join('');
     
             const accordionItem = `
             </head>
@@ -445,7 +449,13 @@ $(document).ready(function() {
                     </h2>
                     <div id="${collapseId}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#recipes-container">
                         <div class="accordion-body">
-                            ${item}
+                            <h5>${item.title}</h5>
+                            <h5>Ingredients</h5>
+                            <ul>${ingredientsList}</ul>
+                            <h5>Directions</h5>
+                            <ul>${directionsList}</ul>
+                            <h5>Carbon Footprint</h5>
+                            <ul>${item.carbonFootprint}</ul>
                         </div>
                     </div>
                 </div>

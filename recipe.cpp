@@ -20,43 +20,26 @@ void recipe::DisplayCarbon() const{
 }
 
 void recipe::display() const{
-    // cout << title << endl;
-    // cout << "Ingredients: " << endl;
-    // for(int i = 0; i < ingredients.size(); ++i){
-    //     cout << "  " << ingredients.at(i) << endl; 
-    // }
-    // cout << endl;
-    // cout << "Directions: " << endl;
-    // for(int i = 0; i < directions.size(); ++i){
-    //     cout << "  " << directions.at(i) << endl; 
-    // }
-    // cout << "Carbon amount: " << carbon << endl;
-    // cout << endl; 
-    cout << "*========================================*" << endl;
-    cout << title << endl;
-    cout << "*========================================*" << endl;
+    string ingredientstring = "";
+    string directionstring = "";
+
+    cout << title << '|';
 
     // Display Ingredients
-    cout << "\nIngredients:\n";
-    cout << "------------------------------------------" << endl;
     for (int i = 0; i < ingredients.size(); ++i) {
-        cout << "| " << std::left << std::setw(40) << ingredients.at(i) << " |" << endl;
+        ingredientstring = ingredientstring + ingredients.at(i) + "@@";
     }
-    cout << "------------------------------------------" << endl;
+    cout << ingredientstring << '|';
 
     // Display Directions
-    cout << "\nDirections:\n";
-    cout << "------------------------------------------" << endl;
     int step = 1;
     for (int i = 0; i < directions.size(); ++i) {
-        cout << "Step " << step++ << ": " << directions.at(i) << endl;
+        directionstring = directionstring + "Step " + to_string(step++) + ": " + directions.at(i) + "~";
     }
-    cout << "------------------------------------------" << endl;
+    cout << directionstring << '|';
 
     // Display Carbon Footprint
-    cout << "\nCarbon Footprint: "  
-         << carbon << " kg CO2" << endl;
-    cout << "==========================================" << endl;
+    cout << carbon << " kg CO2" << '|';
 }
 void recipe::setTitle(string t){
     title = t;

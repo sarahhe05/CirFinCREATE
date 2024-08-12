@@ -43,7 +43,17 @@ app.post('/submit', (req, res) => {
             return;
         }
         const result = stdout.trim().split('##').filter(line => line.length > 0);
-        res.json({ message: result });
+        const recipes = result.map(line => {
+            const [title, ingredients, directions, carbonFootprint] = line.split('|');
+
+            return {
+                title,
+                ingredients: ingredients.split("@@").filter(line => line.length > 0),  // Split ingredients by comma
+                directions: directions.split("~").filter(line => line.length > 0),    // Split directions by semicolon
+                carbonFootprint
+            };
+        });
+        res.json({ message: recipes });
     });
 });
 
