@@ -43,6 +43,12 @@
     color: #1d0100;
   }
 
+  ul {
+    font-size: 14pt;
+    font-family: 'Oswald';
+    color: #1d0100;
+  }
+
   .light-text{
     color:#efffda;
   }
@@ -152,26 +158,13 @@
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 50px;
+    font-family: 'Oswald';
   }
  
-  #exact-checkbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  label {
-    display: inline-flex;
-    align-items: center; /* Vertically center the checkbox and text */
-  }
-  
-  input[type="checkbox"] {
-    margin-right: 5px; /* Space between checkbox and text */
-  }
-
   .submit-button {
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Oswald';
   }
 
   #ingredientSearch {
@@ -218,28 +211,25 @@
   
   /* Default accordion button background */
   .accordion-item .accordion-button {
-    background-color: #94AF72;
+    background-color: #838b55;
     color: #1d0100;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   /* Change background when the accordion is expanded */
   .accordion-item .accordion-button:not(.collapsed) {
-    background-color: #838B55; /* Active background color */
-    color: #EFFFDA;
+    background-color: #94af72; /* Active background color */
   }
 
   /* Change color when hover */
   .accordion-button:hover {
-    background-color: #838B55; /* Active background color */
-    color: #EFFFDA;
+    background-color: #94af72; /* Active background color */
   }
 
   .accordion-body{
-    color: #EFFFDA;
+    color: #94af72;
   }
 
   #collapse1, #collapse2, #collapse3, #collapse4, #collapse5{
-    background-color: #838B55;
-    
+    background-color: #94af72;
   }

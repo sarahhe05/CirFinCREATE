@@ -427,7 +427,7 @@ $(document).ready(function() {
     function displayResult(results) {
         // Clear existing accordion items
         $('#recipes-container').empty();
-    
+        
         // Loop through each result and create an accordion item
         results.forEach((item, index) => {
             const collapseId = `collapse${index+1}`;
@@ -444,18 +444,17 @@ $(document).ready(function() {
                         <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" 
                                 type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" 
                                 aria-expanded="${index === 0}" aria-controls="${collapseId}">
-                            Recipe Number ${index + 1}
+                            <h2>${item.title}</h2>
                         </button>
                     </h2>
                     <div id="${collapseId}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#recipes-container">
                         <div class="accordion-body">
-                            <h5>${item.title}</h5>
-                            <h5>Ingredients</h5>
+                            <h3>Ingredients</h3>
                             <ul>${ingredientsList}</ul>
-                            <h5>Directions</h5>
+                            <h3>Directions</h3>
                             <ul>${directionsList}</ul>
-                            <h5>Carbon Footprint</h5>
-                            <ul>${item.carbonFootprint}</ul>
+                            <h3>Carbon Footprint</h3>
+                            <p>${item.carbonFootprint}</p>
                         </div>
                     </div>
                 </div>
