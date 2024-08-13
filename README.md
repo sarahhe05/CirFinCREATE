@@ -4,7 +4,7 @@ Our project ECOMENU is a recipe recommendation platform that empowers users to m
 ## Data
 We compiled carbon footprint and environmental data from multiple data sources for a comprehensive collection. 
 
-### Ingredients Data Sources
+### Ingredients
 - [AGRIBALYSE Data Access](https://doc.agribalyse.fr/documentation-en/agribalyse-data/data-access)
 - [SU-EATABLE LIFE Dataset](https://figshare.com/articles/dataset/SU-EATABLE_LIFE_a_comprehensive_database_of_carbon_and_water_footprints_of_food_commodities/13271111?file=27921765)
 - [Environment Impact of Food Production](https://www.kaggle.com/datasets/selfvivek/environment-impact-of-food-production)
@@ -13,7 +13,7 @@ We compiled carbon footprint and environmental data from multiple data sources f
 - `Ingredient`: The name of the ingredient.
 - `Carbon Footprint`: The carbon dioxide emission levels for each ingredient, measured in CO2e per kilogram of food.
 
-### Recipes Data Source
+### Recipes
 - [Recipe Dataset](https://www.kaggle.com/datasets/wilmerarltstrmberg/recipe-dataset-over-2m)
 
 #### Columns:
@@ -24,5 +24,5 @@ We compiled carbon footprint and environmental data from multiple data sources f
 - `Valid Ingredient Count`: The number of ingredients used in the dish.
 - `Carbon`: The estimated total carbon emissions from the dish.
 
-### Global Temperature Data Source
+### Global Temperature
 - [NASA Global Temperature Data](https://climate.nasa.gov/vital-signs/global-temperature/?intent=121)
