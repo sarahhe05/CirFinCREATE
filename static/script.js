@@ -236,10 +236,7 @@ $(document).ready(function() {
        
         // Add the scrollIntoView event listener to each collapse element
         $('#recipes-container .accordion-collapse').on('shown.bs.collapse', function () {
-            const header = $(this).prev('.accordion-header');
-        
-            window.scrollTo({
-                top: header, behavior: 'smooth' // Smooth scroll to the header
-            });
+            const accordionHeader = $(this).prev('.accordion-header'); // Get the corresponding accordion header
+            accordionHeader[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-});
+}}});

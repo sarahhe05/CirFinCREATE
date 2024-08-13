@@ -97,8 +97,13 @@
   .landing-button-text{
     margin: auto;
   }
+
   .landing-button:hover {
     background-color: #838b55; /* Green */
+    color: #efffda;
+  }
+
+  .landing-button:hover .landing-button-text{
     color: #efffda;
   }
 
@@ -159,13 +164,12 @@
     margin-right: auto;
     padding-bottom: 50px;
     font-family: 'Oswald';
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Vertically center items */
+    gap: 10px; /* Optional: space between elements */
   }
- 
-  .submit-button {
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Oswald';
-  }
+
 
   #ingredientSearch {
       width: 100%;
@@ -196,12 +200,19 @@
       color: #1d0100;
   }
   
+  .submit-button {
+    margin-top: 10px;
+    background-color: #EFFFDA;
+    border-width: 2px;
+    border-color: #1d0100;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Oswald';
+  }
 
-  @media (max-width: 600px) {
-    .projects-row {
-      display: flex;
-      flex-wrap: wrap; /* Change to flex-wrap if screen width is less than 600px */
-    }
+  .submit-button:hover {
+    background-color: #838b55; /* Green */
+    color: #efffda;
   }
 
   #recipes-container{
@@ -232,9 +243,4 @@
 
   #collapse1, #collapse2, #collapse3, #collapse4, #collapse5{
     background-color: #94af72;
-  }
-
-  #default-message{
-    margin-left: auto;
-    margin-right: auto;
   }
