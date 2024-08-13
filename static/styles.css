@@ -233,3 +233,8 @@
   #collapse1, #collapse2, #collapse3, #collapse4, #collapse5{
     background-color: #94af72;
   }
+
+  #default-message{
+    margin-left: auto;
+    margin-right: auto;
+  }

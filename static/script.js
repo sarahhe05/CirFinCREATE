@@ -169,43 +169,6 @@ $(document).ready(function() {
         }
     }
 
-    // // Handle form submission
-    // $('#ingredientForm').submit(function(event) {
-    //     event.preventDefault(); // Prevent the default form submission
-
-    //     // Send the selected ingredients to the backend using AJAX
-    //     $.ajax({
-    //         url: '/submit', // Flask endpoint
-    //         type: 'POST',
-    //         contentType: 'application/json',
-    //         data: JSON.stringify({ ingredients: selectedValues }),
-    //         success: function(response) {
-    //             console.log('Success:', response);
-    //             // Optionally handle success, e.g., show a success message
-    //         },
-    //         error: function(error) {
-    //             console.error('Error:', error);
-    //             // Optionally handle error
-    //         }
-    //     });
-    // });
-
-    // function DisplayRecipes(value) {
-
-    //     fetch('/search', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ ingredient: value })
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         document.getElementById('result').innerText = data.message;
-    //     })
-    //     .catch(error => console.error('Error:', error));
-    // }
-
     // Submit form
     $('form').submit(function(event) {
         event.preventDefault();
@@ -232,6 +195,10 @@ $(document).ready(function() {
         // Clear existing accordion items
         $('#recipes-container').empty();
         
+        if (results.length === 0) {
+            // Display a default message when no results are available
+            $('#recipes-container').append('<p>No recipes found. Please try a different search.</p>');
+        } else {
         // Loop through each result and create an accordion item
         results.forEach((item, index) => {
             const collapseId = `collapse${index+1}`;
@@ -266,5 +233,13 @@ $(document).ready(function() {
     
             $('#recipes-container').append(accordionItem);
         });
-    }
+       
+        // Add the scrollIntoView event listener to each collapse element
+        $('#recipes-container .accordion-collapse').on('shown.bs.collapse', function () {
+            const header = $(this).prev('.accordion-header');
+        
+            window.scrollTo({
+                top: header, behavior: 'smooth' // Smooth scroll to the header
+            });
+        });
 });
