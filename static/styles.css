@@ -170,7 +170,6 @@
     gap: 10px; /* Optional: space between elements */
   }
 
-
   #ingredientSearch {
       width: 100%;
       padding: 8px;
@@ -244,3 +243,28 @@
   #collapse1, #collapse2, #collapse3, #collapse4, #collapse5{
     background-color: #94af72;
   }
+
+  #footer-section{
+    background-color: #838b55;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    }
+
+
+  /*footer*/
+  #footer-section{
+    margin-top: 50px;
+    background-color: #838b55;
+    }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+
+    #names {
+      text-align: center;
+      padding-top: 5px;
+    }
+  
