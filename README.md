@@ -5,6 +5,10 @@ To bring this idea to life, we gathered data on popular and sustainable recipes,
 
 One of the challenges we faced was finding and learning about a suitable hosting engine for our website. Furthermore, due to the varying formats within the database, we had to devise creative solutions to accurately extract values such as units, amounts, and ingredients in order to calculate the carbon footprint of each recipe.
 
+Check out our DevPost submissions!
+- [CirFin CREATE Civic Achievement Award](https://devpost.com/software/ecomenu)
+- [Boost Hacks II Most Creative Hacks](https://devpost.com/software/ecomenu-c6rb2l)
+
 ## Data
 We compiled carbon footprint and environmental data from multiple data sources for a comprehensive collection. 
 
