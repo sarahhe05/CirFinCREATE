@@ -3,3 +3,4 @@ data files/recipes_data.csv
 a.out
 filterDisplay
 filterDisplay.exe
+node_modules/
